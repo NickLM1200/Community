@@ -1,6 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Admins</h1>
+<h1>Welcome back Administrator!</h1>
+
+<p>Please go ahead and sign in to load your options</p>
+
+<div class = "login container">
+    <div class = "sia-1">
+      <%= form_with url: new_admin_path do |form| %>
+        <%= form.label :username %>
+        <%= form.text_field :username %>
+      <% end %>
+    </div>
+</div>
+
 
 <div id="admins">
   <% @admins.each do |admin| %>
