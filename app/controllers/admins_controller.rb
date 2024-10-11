@@ -4,9 +4,9 @@ class AdminsController < ApplicationController
   # GET /admins or /admins.json
   def index
     @admins = Admin.all
-    #if session[:username]
-     # @admin = Admin.find_by(session[:username])
-    #end
+    if session[:username]
+      @admin = Admin.find_by(session[:username])
+    end
   end
 
   # GET /admins/1 or /admins/1.json
@@ -55,8 +55,8 @@ class AdminsController < ApplicationController
   def destroy
     @admin.destroy!
 
-    #session[:username] = nil
-    #redirect_to admins_path, notice: "Logged out"
+    session[:username] = nil
+    redirect_to admins_path, notice: "Logged out"
 
     respond_to do |format|
       format.html { redirect_to admins_path, status: :see_other, notice: "Admin was successfully destroyed." }
