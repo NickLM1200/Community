@@ -2,6 +2,10 @@
 
 <h1>Welcome back Administrator!</h1>
 
+<% if @admin %>
+  Logged is as: <% @admin.username %>
+<% end %>
+
 <p>Please go ahead and sign in to load your options</p>
 
 <div class = "login container">
