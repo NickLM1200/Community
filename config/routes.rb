@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   #get /admins
-  get "admin", to: "admins#index"
+  #get "admins", to: "admins#index"
+  #delete "logout", to: "admins#destroy"
 end
