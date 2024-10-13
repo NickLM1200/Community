@@ -29,7 +29,5 @@ Rails.application.routes.draw do
   #get /admins
   get "admin", to: "admins#index"
 
-  get "admin/menu", to: "admins#menu"
-
-  delete "logout", to: "admins#destroy"
+  get "adminaccess", to: "adminSession#index"
 end

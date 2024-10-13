@@ -36,18 +36,6 @@ class AdminsController < ApplicationController
         format.json { render json: @admin.errors, status: :unprocessable_entity }
       end
     end
-
-    def login
-      @admin = Admin.find_by(username: params[:username])
-
-      if !!@admin && @admin.authenticate(params[:protectedPasswd])
-        session[:username] = @admin.username
-        redirect_to admin_menu_path, notice: "Logged in successgully"
-      else 
-        message = "Invalid credentials"
-        redirect_to admins_path, notice: message
-      end
-    end
   end
 
   # PATCH/PUT /admins/1 or /admins/1.json
