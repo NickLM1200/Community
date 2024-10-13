@@ -19,6 +19,10 @@ class AdminsController < ApplicationController
   def edit
   end
 
+  #GET /admins/menu
+  def menu
+  end
+
   # POST /admins or /admins.json
   def create
     @admin = Admin.new(admin_params)
@@ -30,6 +34,18 @@ class AdminsController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @admin.errors, status: :unprocessable_entity }
+      end
+    end
+
+    def login
+      @admin = Admin.find_by(username: params[:username])
+
+      if !!@admin && @admin.authenticate(params[:protectedPasswd])
+        session[:username] = @admin.username
+        redirect_to admin_menu_path, notice: "Logged in successgully"
+      else 
+        message = "Invalid credentials"
+        redirect_to admins_path, notice: message
       end
     end
   end
@@ -60,11 +76,11 @@ class AdminsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin
-      @admin = Admin.find(params[:id])
+      @admin = Admin.find(params[:username])
     end
 
     # Only allow a list of trusted parameters through.
     def admin_params
-      params.require(:admin).permit(:username, :email, :firstName, :protectedPasswd)
+      params.require(:admin).permit(:username, :email, :firstName, :protectedPasswd, :password_digest)
     end
 end

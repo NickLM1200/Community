@@ -6,9 +6,14 @@ Rails.application.routes.draw do
   resources :dependents
   resources :categories
   resources :questions
-  resources :admins
   resources :users
   resources :organizations
+  resources :admins do
+    collection do
+      post 'login'
+    end
+  end
+  
   root "pages#home"
   get 'pages/home'
   resources :events
@@ -23,5 +28,8 @@ Rails.application.routes.draw do
 
   #get /admins
   get "admin", to: "admins#index"
+
+  get "admin/menu", to: "admins#menu"
+
   delete "logout", to: "admins#destroy"
 end
