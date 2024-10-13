@@ -1,24 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Welcome back Administrator!</h1>
-
-<p>Please go ahead and sign in to load your options</p>
+<h1>Admins</h1>
 
 <div>
+  <%= form_with url: admins_path do |form| %>
     <div>
-      <%= form_with url: admins_path do |form| %>
-        <div>
-          <%= form.label :username %>
-          <%= form.text_field :username, class:"form-control", placeholder: "Username" %>
-        </div>
-        <div>
-          <%= form.label :Password %>
-          <%= form.text_field :protectedPasswd, class:"form-control", placeholder: "Password" %>
-        </div>
-        <br>
-        <div class>
-          <%= form.submit "Log in" %>
-        </div>
-      <% end %>
+      <%= form.label :username, style: "display: block" %>
+      <%= form.text_field :username %>
     </div>
+
+    <div>
+      <%= form.label :protectedPasswd, style: "display: block" %>
+      <%= form.password_field :protectedPasswd %>
+    </div>
+
+    <p></p>
+
+    <div>
+      <%= form.submit "Login" %>
+    </div>
+  <% end %>
 </div>

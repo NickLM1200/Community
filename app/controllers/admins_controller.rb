@@ -4,9 +4,6 @@ class AdminsController < ApplicationController
   # GET /admins or /admins.json
   def index
     @admins = Admin.all
-    if session[:username]
-      @admin = Admin.find_by(session[:username])
-    end
   end
 
   # GET /admins/1 or /admins/1.json
@@ -28,7 +25,6 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if @admin.save
-        session[:username] = @admin.username
         format.html { redirect_to @admin, notice: "Admin was successfully created." }
         format.json { render :show, status: :created, location: @admin }
       else
@@ -53,10 +49,7 @@ class AdminsController < ApplicationController
 
   # DELETE /admins/1 or /admins/1.json
   def destroy
-    @admin.destroy!
-
-    session[:username] = nil
-    redirect_to admins_path, notice: "Logged out"
+    @admin.destroy
 
     respond_to do |format|
       format.html { redirect_to admins_path, status: :see_other, notice: "Admin was successfully destroyed." }
@@ -72,6 +65,6 @@ class AdminsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def admin_params
-      params.fetch(:admin, {})
+      params.require(:admin).permit(:username, :email, :firstName, :protectedPasswd)
     end
 end
