@@ -4,6 +4,9 @@ class AdminsController < ApplicationController
   # GET /admins or /admins.json
   def index
     @admins = Admin.all
+    if session[:username]
+      @admin = Admin.find_by(id: session[:username])
+    end
   end
 
   # GET /admins/1 or /admins/1.json
@@ -17,10 +20,6 @@ class AdminsController < ApplicationController
 
   # GET /admins/1/edit
   def edit
-  end
-
-  #GET /admins/menu
-  def menu
   end
 
   # POST /admins or /admins.json
@@ -69,6 +68,6 @@ class AdminsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def admin_params
-      params.require(:admin).permit(:username, :email, :firstName, :protectedPasswd, :password_digest)
+      params.require(:admin).permit(:username, :email, :firstName, :password, :password_confirmation)
     end
 end

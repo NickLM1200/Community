@@ -8,11 +8,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :users
   resources :organizations
-  resources :admins do
-    collection do
-      post 'login'
-    end
-  end
+  resources :admins, param: :username
   
   root "pages#home"
   get 'pages/home'
@@ -29,5 +25,6 @@ Rails.application.routes.draw do
   #get /admins
   get "admin", to: "admins#index"
 
-  get "adminaccess", to: "adminSession#index"
+  get "adminaccess", to: "asession#new"
+  post "adminaccess", to: "asession#create"
 end

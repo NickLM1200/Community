@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Admins</h1>
+
+<div>
+  <%= form_with url: adminaccess_path do |form| %>
+    <div>
+      <%= form.label :username, style: "display: block" %>
+      <%= form.text_field :username, placeholder: "username" %>
+    </div>
+
+    <div>
+      <%= form.label :password, style: "display: block" %>
+      <%= form.password_field :password, placeholder: "password" %>
+    </div>
+
+    <p></p>
+
+    <div>
+      <%= form.submit "Login" %>
+    </div>
+  <% end %>
+</div>
