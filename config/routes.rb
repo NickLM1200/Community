@@ -27,4 +27,5 @@ Rails.application.routes.draw do
 
   get "adminaccess", to: "asession#new"
   post "adminaccess", to: "asession#create"
+  delete "adminlogout", to: "asession#destroy"
 end

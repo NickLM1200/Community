@@ -27,6 +27,6 @@ class AsessionController < ApplicationController
 
   def destroy
     session[:username] = nil
-    redirect_to adminaccess_path, notice: "Logged out"
+    redirect_to adminaccess_path, notice: "Logged out successfully"
   end
 end
