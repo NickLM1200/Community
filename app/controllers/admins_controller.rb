@@ -5,7 +5,9 @@ class AdminsController < ApplicationController
   def index
     @admins = Admin.all
     if session[:username]
-      @admin = Admin.find_by(id: session[:username])
+      @admin = Admin.find_by(username: session[:username])
+    else
+      redirect_to adminaccess_path
     end
   end
 
@@ -25,7 +27,6 @@ class AdminsController < ApplicationController
   # POST /admins or /admins.json
   def create
     @admin = Admin.new(admin_params)
-
     respond_to do |format|
       if @admin.save
         format.html { redirect_to @admin, notice: "New admin was successfully created." }
@@ -52,8 +53,10 @@ class AdminsController < ApplicationController
 
   # DELETE /admins/1 or /admins/1.json
   def destroy
+    if session[:username] == @admin.username
+      session[:username] = nil
+    end
     @admin.destroy
-
     respond_to do |format|
       format.html { redirect_to admins_path, status: :see_other, notice: "Admin was successfully destroyed." }
       format.json { head :no_content }

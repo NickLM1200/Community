@@ -1,14 +1,6 @@
 <%= form_with(model: admin) do |form| %>
   <% if admin.errors.any? %>
-    <div style="alert alert-danger">
-      <%= @admin.errors.full_message.each do |message| %>
-        <div>
-          <%= message %>
-        </div>
-      
-    </div>
-  <% end %>
-
+    <div class = "alert alert-danger">
       <ul>
         <% admin.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -39,7 +31,7 @@
 
   <div>
     <%= form.label :password_confirmation, style: "display: block" %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmat %>
   </div>
 
 <p></p>
