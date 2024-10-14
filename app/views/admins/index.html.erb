@@ -1,7 +1,7 @@
 <h1>Admin Center</h1>
 
-<% if @admin %>
-  Welcome back <%= @admin.firstName %>
+<% if Current.admin %>
+  Welcome back <%= Current.admin.firstName %>
 <% end %>
 <p></p>
 <div id="admins">

@@ -1,17 +1,17 @@
 class AsessionController < ApplicationController
   def new
     if session[:username]
-    @admin = Admin.find_by(username: session[:username])
-      if @admin
-        session[:username] = @admin.username
-        redirect_to admins_path
+      Current.admin = Admin.find_by(username: session[:username])
+        if Current.admin
+          session[:username] = Current.admin.username
+          redirect_to admins_path
+        else
+          session[:username] = nil
+          render :new
+        end
       else
-        session[:username] = nil
         render :new
       end
-    else
-      render :new
-    end
   end
 
   def create

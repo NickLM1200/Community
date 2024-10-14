@@ -14,7 +14,7 @@
           <%= link_to 'Log In', "#", class: 'nav-link' %>
         </li>
 
-        <% if @admin %>
+        <% if Current.admin %>
           <li class="nav-item">
             <%= button_to 'Logout', adminlogout_path, method: :delete, class: 'nav-link' %>
           </li>
