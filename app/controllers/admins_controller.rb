@@ -13,15 +13,30 @@ class AdminsController < ApplicationController
 
   # GET /admins/1 or /admins/1.json
   def show
+    if session[:username]
+      @admin = Admin.find_by(username: session[:username])
+    else
+      redirect_to adminaccess_path
+    end
   end
 
   # GET /admins/new
   def new
     @admin = Admin.new
+    if session[:username]
+      @admin = Admin.find_by(username: session[:username])
+    else
+      redirect_to adminaccess_path
+    end
   end
 
   # GET /admins/1/edit
   def edit
+    if session[:username]
+      @admin = Admin.find_by(username: session[:username])
+    else
+      redirect_to adminaccess_path
+    end
   end
 
   # POST /admins or /admins.json

@@ -16,17 +16,26 @@ class AsessionController < ApplicationController
 
   def create
     @admin = Admin.find_by(username: params[:username])
-    if @admin.present? && @admin.authenticate(params[:password])      
-      session[:username] = @admin.username
-      redirect_to admins_path, notice: "Welcome back"
-    else
-      flash[:alert] = "Invalid email or password"
-      render :new
+
+    respond_to do |format|
+      if @admin.present? && @admin.authenticate(params[:password])      
+        session[:username] = @admin.username
+        format.html {redirect_to admins_path, notice: "Welcome back"}
+        format.json { render json: @admin.errors, status: :unprocessable_entity }
+      else
+        flash[:alert] = "Invalid email or password"
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @admin.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     session[:username] = nil
-    redirect_to adminaccess_path, notice: "Logged out successfully"
+
+    respond_to do |format|
+      format.html { redirect_to adminaccess_path, notice: "Logged out successfully"}
+      format.json { head :no_content }
+    end
   end
 end
