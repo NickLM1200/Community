@@ -14,7 +14,7 @@ services:
 #this is our rails app container
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rake db:create db:migrate admin:create && bundle exec rails s -b '0.0.0.0'"
     volumes:
       - ".:/resource-finder" # Local project root mounted to /RESOURCE-FINDER in the container
     ports:
@@ -25,3 +25,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      DEFAULT_ADMIN_USERNAME: ${DEFAULT_ADMIN_USERNAME}
+      DEFAULT_ADMIN_EMAIL: ${DEFAULT_ADMIN_EMAIL}
+      DEFAULT_ADMIN_FIRST_NAME: ${DEFAULT_ADMIN_FIRST_NAME}
+      DEFAULT_ADMIN_PASSWORD: ${DEFAULT_ADMIN_PASSWORD}
+      DEFAULT_ADMIN_PASSWORD_CONFIRMATION: ${DEFAULT_ADMIN_PASSWORD_CONFIRMATION}

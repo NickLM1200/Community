@@ -1,7 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<h1>Admin Center</h1>
 
-<h1>Admins</h1>
-
+<% if Current.admin %>
+  Welcome back <%= Current.admin.firstName %>
+<% end %>
+<p></p>
 <div id="admins">
   <% @admins.each do |admin| %>
     <%= render admin %>

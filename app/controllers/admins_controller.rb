@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: %i[ show edit update destroy ]
+  before_action :set_current_admin
 
   # GET /admins or /admins.json
   def index
@@ -22,10 +23,9 @@ class AdminsController < ApplicationController
   # POST /admins or /admins.json
   def create
     @admin = Admin.new(admin_params)
-
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to @admin, notice: "Admin was successfully created." }
+        format.html { redirect_to @admin, notice: "New admin was successfully created." }
         format.json { render :show, status: :created, location: @admin }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -49,8 +49,10 @@ class AdminsController < ApplicationController
 
   # DELETE /admins/1 or /admins/1.json
   def destroy
-    @admin.destroy!
-
+    if session[:username] == @admin.username
+      session[:username] = nil
+    end
+    @admin.destroy
     respond_to do |format|
       format.html { redirect_to admins_path, status: :see_other, notice: "Admin was successfully destroyed." }
       format.json { head :no_content }
@@ -60,11 +62,11 @@ class AdminsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin
-      @admin = Admin.find(params[:id])
+      @admin = Admin.find(params[:username])
     end
 
     # Only allow a list of trusted parameters through.
     def admin_params
-      params.fetch(:admin, {})
+      params.require(:admin).permit(:username, :email, :firstName, :password, :password_confirmation)
     end
 end

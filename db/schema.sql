@@ -35,7 +35,7 @@ CREATE TABLE Admins(
     username VARCHAR(15) PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
     firstName VARCHAR(150) NOT NULL,
-    protectedPassword VARCHAR(80) NOT NULL
+    password_digest VARCHAR(80) NOT NULL
 );
 
 CREATE TABLE Questions(
