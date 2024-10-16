@@ -43,12 +43,16 @@
                 <li class = "nav-item">
                   <%= link_to 'Users', "#", class:'nav-link' %>
                 </li>
-                <li class="nav-item">
-                  <%= button_to 'Logout', adminlogout_path, method: :delete, class: 'nav-link' %>
-                </li>
               <% end %>
          </div>
       </ul>
+      <% if Current.admin %>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <%= button_to 'Logout', adminlogout_path, method: :delete, class: 'nav-link btn btn-link' %>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </div>
 </nav>

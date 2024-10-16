@@ -2,20 +2,42 @@
 
 <div>
   <%= form_with url: adminaccess_path do |form| %>
-    <div>
+    <div class = "mb-3">
       <%= form.label :username, style: "display: block" %>
-      <%= form.text_field :username, placeholder: "username" %>
+      <div class = "input-group">
+        <%= form.text_field :username, class: "form-control", placeholder: "Username" %>
+        <span class="input-group-text">
+          <i class="bi bi-person-vcard"></i>
+        </span>
+      </div>
     </div>
 
-    <div>
+    <div class = "mb-3">
       <%= form.label :password, style: "display: block" %>
-      <%= form.password_field :password, placeholder: "password" %>
+      <div class = "input-group">
+        <%= form.password_field :password, class: "form-control", id: "passwordField", placeholder: "Password" %>
+        <button type = "button" id = "togglePassword" class = "btn btn-outline-secondary">
+        <i class = "bi bi-eye-slash" id = "toggleIcon"></i>
+        </button>
+      </div>
     </div>
 
     <p></p>
 
-    <div>
-      <%= form.submit "Login" %>
+    <div class = "d-grid gap-2 col-6 mx-auto">
+      <%= form.submit "Login", class: "btn btn-primary btn-lg" %>
     </div>
   <% end %>
+  <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const passwordField = document.querySelector('#passwordField');
+    const toggleIcon = document.querySelector('#toggleIcon');
+
+    togglePassword.addEventListener('click', function () {
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      toggleIcon.classList.toggle('bi-eye');
+      toggleIcon.classList.toggle('bi-eye-slash');
+    });
+  </script>
 </div>
