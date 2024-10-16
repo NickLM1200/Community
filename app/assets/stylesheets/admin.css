@@ -1,0 +1,17 @@
+.container .btn-alogin {
+    background-color:  #4A6959;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .container .btn-alogin:hover {
+    background-color: #3C594A;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+  }
+
+  .container .btn-alogin:active {
+    background-color: #344E3E;
+    box-shadow: none;
+  }

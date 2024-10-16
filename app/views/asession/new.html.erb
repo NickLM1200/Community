@@ -5,14 +5,14 @@
     <div class = "mb-3">
       <%= form.label :username, style: "display: block" %>
       <div class = "input-group">
-        <%= form.text_field :username, class: "form-control", placeholder: "Username" %>
+        <%= form.text_field :username, class: "form-control", id: "usernamefield", placeholder: "Username" %>
         <span class="input-group-text">
           <i class="bi bi-person-vcard"></i>
         </span>
       </div>
     </div>
 
-    <div class = "mb-3">
+    <div class = "col-mb-3">
       <%= form.label :password, style: "display: block" %>
       <div class = "input-group">
         <%= form.password_field :password, class: "form-control", id: "passwordField", placeholder: "Password" %>
@@ -25,13 +25,19 @@
     <p></p>
 
     <div class = "d-grid gap-2 col-6 mx-auto">
-      <%= form.submit "Login", class: "btn btn-primary btn-lg" %>
+      <%= form.submit "Login", class: "btn btn-alogin btn-lg" %>
     </div>
   <% end %>
   <script>
+    const usernamefield = document.getElementById('usernamefield');
     const togglePassword = document.querySelector('#togglePassword');
     const passwordField = document.querySelector('#passwordField');
     const toggleIcon = document.querySelector('#toggleIcon');
+
+    usernamefield.addEventListener('input', function()
+    {
+      this.value = this.value.toLowerCase();
+    });
 
     togglePassword.addEventListener('click', function () {
       const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
