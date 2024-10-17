@@ -1,1 +1,43 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore</title>
+    <%= stylesheet_link_tag 'card', media: 'all' %>
+</head>
+<body>
+    <div class="full_container">
+        <header>
+            <div class="header-container">
+                <h1>Healthcare Resources</h1>
+            </div>
+        </header>
+
+        <div class="card-grid">
+            <% 4.times do %> <!-- Loop to create 4 cards -->
+            <div class="card">
+                <h2>Organization Name</h2>
+                <div class="description">
+                    <p>Description/Map</p>
+                </div>
+                <div class="contact-header">
+                    <div class="contact-info">Contact Information</div>
+                    <div class="favorite">&#9733;</div> <!-- Star icon -->
+                </div>
+
+                <div class="info-buttons">
+                    <button class="add-button">Address</button>
+                    <button class="phone-button">Phone Number</button>
+                    <button class="web-button">Website</button>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</body>
+</html>
+=======
 <h1>Healthcare Resources</h1>
+>>>>>>> 9c654bef23954a2a856005c0f8660114863c6b20

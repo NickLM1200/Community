@@ -1,5 +1,90 @@
-<h1>Pages#survey</h1>
-<p>Find me in app/views/pages/survey.html.erb</p>
+<!DOCTYPE html>
+<! -- Survey Created for COmmunity Resource -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+</head>
 
-<--! quiz questions, please add yours  -->
+-- add style here (CSS)
 
+<! -- !!WARNING!! Do NOT modify the functions here, they are for the entire survey -->
+<script defer> // might not need defer
+
+    // going to change this to branching logic and more scaleable.
+    function showNext() {
+    document.getElementById("question1").style.display = "none";
+    document.getElementById("question2").style.display = "block";
+}
+</script>
+  
+<! -- !!END WARNING!!  -->
+
+<! -- Modify below to include additional questions -->
+
+
+<body>
+    <h1>Survey Form</h1>
+    <form action="store_survey.php" method="POST"> // need a place to save the survey
+   
+    <div id="question1">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+      
+        <input type="checkbox" id="noAnswer" name="noAnswer" value="DoNotWishToAnswer">
+        <label for="noAnswer">Do Not Wish To Answer</label><br><br>
+      
+        <button type="button" onclick="showNext()">Next</button>
+      </div>
+
+      <div id="question2">
+      <label for="safety_check">Are you safe?</label><br>
+      
+      <!-- Yes option -->
+      <input type="radio" id="safe_pos" name="favorite_color" value="red" onclick="showNextSection()">
+      <label for="color_red">Yes</label><br>
+
+      <!-- No Option with Redirection -->
+        <input type="radio" id="safe_neg" name="safety_check" value="no" onclick="redirectToPage()">
+        <label for="safe_neg">No</label><br>
+
+      <button type="button" onclick="showNext()">Next</button>
+      </div>
+
+      <!-- Conditional Section Based on Safety Check (Shows if No is selected) -->
+      <script>
+        function redirectToPage() {
+        window.location.href = "https://www.example.com"; // Change this URL to your target page
+        }  
+        </script>
+
+     <-- End Conditional --> 
+        <div id="question3">
+        <label for="age">Age:</label><br>
+        <input type="text" id="age" name="age" required><br><br>
+        button type="button" onclick="showNext()">Next</button>
+        </div>
+
+        <div id="question4">
+        <label for="gender">Gender:</label><br>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+
+        </select><br><br>
+        button type="button" onclick="showNext()">Next</button>
+        </div>
+
+        <div id="otherGenderDiv" style="display:none;">
+        <label for="otherGender">Please specify:</label><br>
+        <input type="text" id="otherGender" name="otherGender"><br><br>
+        </div>
+
+        <!-- Multiple Choice Questions -->
+
+        <button type="submit">Submit Survey</button>
+    </form>
+</body>
+</html>
