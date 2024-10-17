@@ -16,6 +16,10 @@ class AdminsController < ApplicationController
     @admin = Admin.new
   end
 
+  def dashboard
+    @admins = Admin.all
+  end
+
   # GET /admins/1/edit
   def edit
   end
@@ -64,12 +68,12 @@ class AdminsController < ApplicationController
     end
     if @admin.destroy
       respond_to do |format|
-        format.html { redirect_to admins_path, status: :see_other, notice: "Admin was successfully destroyed." }
+        format.html { redirect_to admindashboard_path, status: :see_other, notice: "Admin was successfully destroyed." }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to admins_path, alert: @admin.errors.full_messages.join(", ") }
+        format.html { redirect_to admindashboard_path, alert: @admin.errors.full_messages.join(", ") }
         format.json { render json: @admin.errors, status: :unprocessable_entity }
       end
     end

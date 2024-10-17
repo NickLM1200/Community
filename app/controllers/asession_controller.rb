@@ -4,7 +4,7 @@ class AsessionController < ApplicationController
       Current.admin = Admin.find_by(username: session[:username])
         if Current.admin
           session[:username] = Current.admin.username
-          redirect_to admins_path
+          redirect_to admindashboard_path
         else
           session[:username] = nil
           render :new
@@ -20,7 +20,7 @@ class AsessionController < ApplicationController
     respond_to do |format|
       if @admin.present? && @admin.authenticate(params[:password])      
         session[:username] = @admin.username
-        format.html {redirect_to admins_path, notice: "Welcome back"}
+        format.html {redirect_to admindashboard_path }
         format.json { render json: @admin.errors, status: :unprocessable_entity }
       else
         flash[:alert] = "Invalid email or password"

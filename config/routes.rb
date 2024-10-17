@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   #get /admins
   get "admin", to: "admins#index"
+  get "admindashboard", to: "admins#dashboard"
 
   get "adminaccess", to: "asession#new"
   post "adminaccess", to: "asession#create"
