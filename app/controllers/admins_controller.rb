@@ -37,12 +37,22 @@ class AdminsController < ApplicationController
   # PATCH/PUT /admins/1 or /admins/1.json
   def update
     respond_to do |format|
-      if @admin.update(admin_params)
-        format.html { redirect_to @admin, notice: "Admin was successfully updated." }
-        format.json { render :show, status: :ok, location: @admin }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
+      begin
+        if @admin.update(admin_params.except(:username))
+          format.html { redirect_to @admin, notice: "Admin was successfully updated." }
+          format.json { render :show, status: :ok, location: @admin }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @admin.errors, status: :unprocessable_entity }
+        end
+      rescue ActiveRecord::ReadOnlyRecord => e
+        if e.message.include?("username cannot be changed once set")
+          format.html { render :edit, alert: "The username cannot be changed once set." }
+          format.json { render json: { error: "The username cannot be changed once set." }, status: :unprocessable_entity }
+        else
+          format.html { render :edit, alert: e.message }
+          format.json { render json: { error: e.message }, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -52,10 +62,16 @@ class AdminsController < ApplicationController
     if session[:username] == @admin.username
       session[:username] = nil
     end
-    @admin.destroy
-    respond_to do |format|
-      format.html { redirect_to admins_path, status: :see_other, notice: "Admin was successfully destroyed." }
-      format.json { head :no_content }
+    if @admin.destroy
+      respond_to do |format|
+        format.html { redirect_to admins_path, status: :see_other, notice: "Admin was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to admins_path, alert: @admin.errors.full_messages.join(", ") }
+        format.json { render json: @admin.errors, status: :unprocessable_entity }
+      end
     end
   end
 
