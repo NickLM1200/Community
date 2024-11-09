@@ -1,12 +1,17 @@
 <h1>Favorites</h1>
 
-<div id="favorites">
+<% if @favorites.any? %>
   <% @favorites.each do |favorite| %>
-    <%= render favorite %>
-    <p>
-      <%= link_to "Show this favorite", favorite %>
-    </p>
+    <div>
+      <!-- Display organization name linked to the favorite -->
+      <%= link_to "View Organization: #{favorite.organization.org_name}", organization_path(favorite.organization) %> |
+      <!-- Link to edit this favorite -->
+      <%= link_to "Edit this favorite", edit_favorite_path(favorite) %> |
+      <!-- Button to destroy (delete) the favorite -->
+      <%= button_to "Destroy this favorite", favorite, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
   <% end %>
-</div>
+<% else %>
+  <p>You have no favorites yet.</p>
+<% end %>
 
-<%= link_to "New favorite", new_favorite_path %>

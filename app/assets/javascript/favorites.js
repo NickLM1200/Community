@@ -1,27 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".favorite form").forEach(form => {
-      form.addEventListener("submit", async (event) => {
-        event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form"); // Adjust the form selector as needed
   
-        try {
-          const response = await fetch(form.action, {
-            method: "POST",
-            headers: { 
-              "X-CSRF-Token": document.querySelector("[name='csrf-token']").content
-            },
-            body: new FormData(form)
-          });
+    // Handle successful AJAX form submission
+    form.addEventListener("ajax:success", function (event) {
+      const [data, status, xhr] = event.detail;
+      // Redirect to the favorites path after a successful save
+      window.location.href = data.redirect_url;  // Pass the URL in the response
+    });
   
-          if (response.ok) {
-            window.location.href = "/favorites"; // Redirect to favorites page on success
-          } else {
-            alert("Could not add to favorites. Please try again later."); // Error handling
-          }
-        } catch (error) {
-          console.error("Error adding to favorites:", error);
-          alert("An error occurred while adding to favorites.");
-        }
-      });
+    // Handle failed AJAX form submission
+    form.addEventListener("ajax:error", function () {
+      alert("Unable to add to favorites.");
     });
   });
   

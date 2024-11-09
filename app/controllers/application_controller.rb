@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 =end
 
+  before_action :set_current_user
+
+
   def current_user
     @current_user ||= User.find_by(username: session[:user_username]) if session[:user_username]
   end
@@ -24,7 +27,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_user
+  def set_current_user
     @current_user ||= if session[:user_username]
                         User.find_by(username: session[:user_username])
                       elsif session[:admin_username]
