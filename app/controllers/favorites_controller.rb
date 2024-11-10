@@ -5,8 +5,8 @@ class FavoritesController < ApplicationController
   # GET /favorites or /favorites.json
   def index
     puts "Current user: #{current_user.username}"
-    @favorites = current_user.favorites.includes(:organization).where("favorites.userID_id = ?", current_user.username)
-    puts "SQL query: #{@favorites.to_sql}"  # Print the generated SQL query for debugging
+    @favorites = current_user.favorites.includes(:organization)
+    #puts "SQL query: #{@favorites.to_sql}"  # Print the generated SQL query for debugging
 
   end  
 

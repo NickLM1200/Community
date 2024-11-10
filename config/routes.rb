@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :events
+  resources :organizations
   
   root "pages#home"
   get 'pages/home'
