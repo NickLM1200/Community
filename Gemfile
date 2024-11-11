@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "3.3.5"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.0"
+gem "rails", "~> 7.1.5"
 
 #adding bootstraps latests stable release
 gem 'bootstrap', '~> 5.3.3'
@@ -49,7 +49,7 @@ gem 'pundit'  # Provides a set of helpers to enforce permission policies.
 gem "redis", ">= 4.0.1"
 
 # Background processing for Ruby, using Redis for storage.
-gem 'sidekiq', '~> 6.0'  
+gem 'sidekiq', '~> 7.3'  
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
