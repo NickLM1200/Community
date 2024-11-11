@@ -83,6 +83,44 @@
   white-space: nowrap;
 }
 
+/* Apply fixed layout and allow text to break in the specific table */
+.events-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* Adjust column widths for the events table and allow text to wrap */
+.events-table th, .events-table td {
+  width: 5.4%; /* Adjust this value to make columns smaller */
+  word-wrap: break-word;  /* Allow text to wrap to the next line */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Allow wrapping */
+}
+
+/* For cells with long links, ensure they don't overflow */
+.events-table .link-cell {
+  max-width: 100px; /* Adjust as needed */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Optional: Make table responsive on smaller screens */
+@media (max-width: 768px) {
+  .events-table th, .events-table td {
+      font-size: 0.8rem; /* Smaller text for better mobile readability */
+  }
+}
+
+@media (max-width: 576px) {
+  .events-table th, .events-table td {
+      display: block; /* Stack cells vertically on very small screens */
+      width: 100%;
+  }
+}
+
+
 @media (max-width: 1200px) {
   .card-list .card-item {
     padding: 15px;

@@ -2,12 +2,13 @@ class User < ApplicationRecord
   has_secure_password
 
   # Associations
-  has_many :dependents, class_name: 'Dependent'
-  has_many :favorites, class_name: 'Favorite', foreign_key: 'userID_id', primary_key: 'username'
+  has_many :dependents, class_name: 'Dependent', foreign_key: :userID_id, dependent: :destroy
+  has_many :favorites, class_name: 'Favorite', foreign_key: :userID_id, primary_key: 'username', dependent: :destroy
   has_many :favorite_organizations, class_name: 'Organization', through: :favorites
-  has_many :reviews, class_name: 'Review'
+  has_many :reviews, class_name: 'Review', foreign_key: :userID_id, dependent: :destroy
   has_many :reviewed_organizations, class_name: 'Organization', through: :reviews
-  has_many :surveys, class_name: 'Survey'
+  has_many :surveys, class_name: 'Survey', foreign_key: :userID_id, dependent: :destroy
+  has_many :eventsw,  class_name: 'Event', foreign_key: :user_id, dependent: :destroy
   #this is an array that holds our age ranges
   AGE_RANGES = ['Under 18', '19 - 24', '25 - 34', '35 - 70', '70 and over']
   

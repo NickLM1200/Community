@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     resources :categories
     resources :organizations
     resources :admins
+    resources :events
+    resources :questions
+    resources :reviews
+    resources :surveys
+    resources :users
   end
   resources :favorites
   resources :reviews

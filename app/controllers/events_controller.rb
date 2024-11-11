@@ -30,7 +30,8 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
-
+    @event.require_user = true
+    
     if params[:event][:isVirtual] == "true"
       @event.street = "Virtual"
       @event.city = "Online"

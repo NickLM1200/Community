@@ -1,0 +1,23 @@
+<h1 class = "text-center">Users</h1>
+<%= button_to "Create new user", new_administrator_user_path, method: :get, class: "btn btn-alogin btn-lg" %>
+<p></p>
+<div id="users">
+  <table class = "table">
+        <thead>
+            <tr>
+                <th scope = "col"><strong>Username:</strong></th>
+                <th scope = "col"><strong>Email:</strong></th>
+                <th scope = "col"><strong>First Name:</strong></th>
+                <th scope = "col"><strong>Age Range:</strong></th>
+                <th scope = "col"><strong>Zip Code:</strong></th>
+                <th scope = "col"><strong>Created:</strong></th>
+                <th scope = "col"><strong>Last Update:</strong></th>
+            </tr>
+        </thead>
+        <tbody class = "table-group-divider">
+            <% @users.each do |user| %>
+              <%= render partial: "user", locals: { user: user} %>
+            <% end %>
+        </tbody>
+    </table>
+</div>

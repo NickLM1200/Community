@@ -7,7 +7,7 @@ class CreateReviews < ActiveRecord::Migration[7.1]
       t.text :comment, null:true
       t.decimal :starValue, null:false, precision:2, scale:1
       t.timestamps
-      t.references :adminID, foreign_key: {to_table: :admins, primary_key: :username}, type: :string, null:true
+      t.references :adminID, foreign_key: {to_table: :admins, on_delete: :nullify, primary_key: :username}, type: :string, null:true
       t.boolean :reviewStatus, null:false
     end
   end

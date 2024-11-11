@@ -1,0 +1,10 @@
+<tr>
+    <td><strong><%= link_to user.username, edit_administrator_user_path(user.username), class: "link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %></strong></td>
+    <td><%= user.email %></td>
+    <td><%= user.first_name %></td>
+    <td><%= user.age_range %></td>
+    <td><%= user.zipcode %></td>
+    <td><%= user.created_at %></td>
+    <td><%= user.updated_at %></td>
+    <td><%= button_to "Delete", administrator_user_path(user), method: :delete, class: 'btn btn-outline-success', onclick: "return confirm('Are you sure you want to delete this user?');" %></td>
+</tr>

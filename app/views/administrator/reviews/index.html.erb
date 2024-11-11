@@ -1,0 +1,24 @@
+<h1 class = "text-center">Reviews</h1>
+<div id="reviews">
+  <table class = "table">
+    <thead>
+      <tr>
+        <th scope = "col"><strong>ID:</strong></th>
+        <th scope = "col"><strong>Organization:</strong></th>
+        <th scope = "col"><strong>User:</strong></th>
+        <th scope = "col"><strong>Title:</strong></th>
+        <th scope = "col"><strong>Comment:</strong></th>
+        <th scope = "col"><strong>Star(s):</strong></th>
+        <th scope = "col"><strong>Status:</strong></th>
+        <th scope = "col"><strong>Admin:</strong></th>
+        <th scope = "col"><strong>Created:</strong></th>
+        <th scope = "col"><strong>Last Update:</strong></th>    
+      </tr>
+    </thead>
+    <tbody class = "table-group-divider">
+      <% @reviews.each do |review| %>
+        <%= render partial: "review", locals: { review: review } %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

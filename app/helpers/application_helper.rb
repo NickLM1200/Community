@@ -4,7 +4,11 @@ module ApplicationHelper
     controller_name == 'admins' ||
     controller_name == 'categories' ||
     controller_name == 'organizations' ||
-    controller_name == 'classifications'
+    controller_name == 'classifications' ||
+    controller_name == 'questions' ||
+    controller_name == 'reviews' ||
+    controller_name == 'surveys' ||
+    controller_name == 'users'
 
     controller_path.include?('administrator/')
   end

@@ -1,0 +1,20 @@
+<h1 class = "text-center">Surveys</h1>
+<div id="surveys">
+  <table class = "table">
+    <thead>
+      <tr>
+        <th scope = "col"><strong>ID:</strong></th>
+        <th scope = "col"><strong>User:</strong></th>
+        <th scope = "col"><strong>Question:</strong></th>
+        <th scope = "col"><strong>Answer:</strong></th>
+        <th scope = "col"><strong>Created:</strong></th>
+        <th scope = "col"><strong>Last Update:</strong></th>    
+      </tr>
+    </thead>
+    <tbody class = "table-group-divider">
+      <% @surveys.each do |survey| %>
+        <%= render partial: "survey", locals: { survey: survey } %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

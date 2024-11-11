@@ -1,0 +1,38 @@
+<div>
+  <%= form_with(model: [:administrator, survey]) do |form| %>
+    <% if survey.errors.any? %>
+      <div class = "alert alert-danger">
+        <ul>
+          <% survey.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <p></p>
+  <div class = "col-mb-3">
+  <%= form.label :userID_id, "User", style: "display: block", class: "form-label" %>
+   <div class = "input-group">
+      <%= form.text_field :userID_id, disabled: survey.persisted?, class: "form-control" %>
+   </div>
+  </div>
+  <p></p>
+  <div class="col-mb-3">
+  <%= form.label :questionID_id, "Question", style: "display: block", class: "form-label" %>
+    <div class="input-group">
+      <% if survey.persisted? %>
+        <%= form.text_field :questionID_id, value: Question.find_by(questionID: survey.questionID_id)&.question, class: "form-control", disabled: true %>
+      <% else %>
+        <%= form.collection_select :questionID_id, Question.all, :questionID, :question, {}, class: "form-control" %>
+      <% end %>
+    </div>
+  </div>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :answer, style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.text_area :answer, disabled: survey.persisted?, class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+</div>

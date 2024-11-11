@@ -16,7 +16,7 @@ class CreateEvents < ActiveRecord::Migration[7.1]
       # Foreign key relationships
       t.references :organization, foreign_key: { to_table: :organizations, primary_key: :organizationId }, type: :integer
       t.references :user, foreign_key: { to_table: :users, primary_key: :username }, type: :string
-      t.references :admin, foreign_key: { to_table: :admins, primary_key: :username }, type: :string
+      t.references :admin, foreign_key: { to_table: :admins, on_delete: :nullify, primary_key: :username }, type: :string
 
       t.timestamps
     end

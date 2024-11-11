@@ -1,0 +1,97 @@
+<div>
+  <%= form_with(model: [:administrator, event]) do |form| %>
+    <% if event.errors.any? %>
+      <div class = "alert alert-danger">
+        <ul>
+          <% event.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :title, style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :title, class: "form-control", placeholder: "ex. United" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :eventDate, "Date & Time", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.datetime_field :eventDate, class: "form-control" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :isVirtual, "Is this a virtual event?", style: "display: block", class: "form-label" %>
+    <div class = "form-check">
+      <%= form.radio_button :isVirtual, true, id: "is_virtual_yes", class: "form-check-input" %>
+      <%= form.label :isVirtual, "Yes", for: "is_virtual_yes" %>
+    </div>
+    <div class = "form-check">
+      <%= form.radio_button :isVirtual, false, id: "is_virtual_no", class: "form-check-input" %>
+      <%= form.label :isVirtual, "No", for: "is_virtual_no" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3" id = "virtual_event_url" style = "display: none;">
+    <%= form.label :meetingLink, "Meeting Link", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.url_field :meetingLink, class: "form-control", placeholder: "ex. www.domain.com/id" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :street, style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :street, id: "street_field", class: "form-control", placeholder: "ex. 123 Street" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :city, style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :city, id: "city_field", class: "form-control", placeholder: "ex. Denver" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :zipcode, "Zip Code", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :zipcode, id: "zipcode_field", class: "form-control", placeholder: "ex. 80002" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :eventstatus, "Event Status", style: "display: block", class: "form-label" %>
+    <div class = "form-check form-switch">
+      <%= form.check_box :eventstatus, class: "form-check-input", id: "flexSwitchCheckChecked", checked: event.eventstatus %>
+      <%= form.label :eventstatus, "Active" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :organization_id, "Organization", style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.collection_select :organization_id, Organization.all, :organizationId, :org_name, { include_blank: 'None', prompt: "Select a Organization (if applicable)"}, {class: "form-select mb-3"} %>
+      </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :eventDescription, "Event Details", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_area :eventDescription, class: "form-control", placeholder: "ex. We want to collect..." %>
+    </div>
+  </div>
+  <p></p>
+
+    <% button_label = event.persisted? ? "Update Event" : "Create Event" %>
+    <% confirmation_message = event.persisted? ? "Are you sure you want to update this event?" : "Are you sure you want to create this event?" %>
+    
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <%= form.submit button_label, class: "btn btn-alogin btn-lg", onclick: "return confirm('#{confirmation_message}');" %>
+    </div>
+    <% end %>
+</div>

@@ -1,0 +1,100 @@
+<div>
+  <%= form_with(model: [:administrator, user]) do |form| %>
+  <% if user.errors.any? %>
+    <div class = "alert alert-danger">
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :username, style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.text_field :username, disabled: user.persisted?, class: "form-control", placeholder: "ex. Username" %>
+      </div>
+      <div class="col-auto">
+        <span id="passwordHelpInline" class="form-text">Once created, this cannot be changed</span>
+      </div>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :email, style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.text_field :email, class: "form-control", placeholder: "ex. email@domain.com" %>
+      </div>
+    </div>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :first_name, "First Name", style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.text_field :first_name, class: "form-control", placeholder: "ex. First Name" %>
+      </div>
+    </div>
+  <p></p>
+  <div class="col-mb-3">
+    <%= form.label :age_range, "Age Range", style: "display: block", class: "form-label" %>
+    <div class="input-group">
+      <%= form.select :age_range, options_for_select([['Under 18', 'Under 18'], ['18-24', '18-24'], ['25-34', '25-34'], ['35-44', '35-44'], ['45-54', '45-54'], ['55-64', '55-64'], ['65 and over', '65 and over']]), { prompt: "Select Age Range" }, {class: "form-select mb-3"} %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :zipcode, "Zip Code", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :zipcode, class: "form-control", placeholder: "ex. 80002" %>
+    </div>
+  </div>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :password, style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+          <%= form.password_field :password, class: "form-control", id: "passwordConfirmationField", placeholder: "ex. Password" %>
+          <button type = "button" id = "togglePasswordConfirmation" class = "btn btn-outline-secondary">
+          <i class = "bi bi-eye-slash" id = "toggleIcon"></i>
+          </button>
+      </div>
+    </div>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :password_confirmation, "Password Confirmation", style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.password_field :password_confirmation, class: "form-control", id: "passwordField", placeholder: "ex. Password" %>
+        <button type = "button" id = "togglePassword" class = "btn btn-outline-secondary">
+        <i class = "bi bi-eye-slash" id = "toggleIcon"></i>
+        </button>
+      </div>
+    </div>
+
+  <p></p>
+    <% button_label = user.persisted? ? "Update User" : "Create User" %>
+    <% confirmation_message = user.persisted? ? "Are you sure you want to update this user?" : "Are you sure you want to create this user?" %>
+
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <%= form.submit button_label, class: "btn btn-alogin btn-lg", onclick: "return confirm('#{confirmation_message}');" %>
+    </div>
+  <% end %>
+  <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('passwordField');
+    const passwordToggleIcon = document.getElementById('passwordToggleIcon');
+    const togglePasswordConfirmation = document.getElementById('togglePasswordConfirmation');
+    const passwordConfirmationField = document.getElementById('passwordConfirmationField');
+    const confirmationToggleIcon = document.getElementById('confirmationToggleIcon');
+
+    togglePassword.addEventListener('click', function () {
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      passwordToggleIcon.classList.toggle('bi-eye');
+      passwordToggleIcon.classList.toggle('bi-eye-slash');
+    });
+
+    togglePasswordConfirmation.addEventListener('click', function () {
+      const type = passwordConfirmationField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordConfirmationField.setAttribute('type', type);
+      confirmationToggleIcon.classList.toggle('bi-eye');
+      confirmationToggleIcon.classList.toggle('bi-eye-slash');
+    });
+  </script>
+</div>

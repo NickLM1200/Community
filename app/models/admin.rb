@@ -11,9 +11,9 @@ class Admin < ApplicationRecord
     validates :username, presence: true, uniqueness: { case_sensitive: false }
     validates :email, presence: true, uniqueness: { case_sensitive: false }
 
-    has_many :events, class_name: 'Event'
+    has_many :events, class_name: 'Event', foreign_key: :admin_id
     has_many :questions, class_name: 'Question'
-    has_many :reviews, class_name: 'Review'
+    has_many :reviews, class_name: 'Review', foreign_key: :adminID_id
 
     private
 

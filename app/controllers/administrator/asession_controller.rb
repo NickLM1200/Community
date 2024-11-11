@@ -24,7 +24,7 @@ module Administrator
           format.html {redirect_to admindashboard_path }
           format.json { render json: @admin.errors, status: :unprocessable_entity }
         else
-          flash[:alert] = "Invalid email or password"
+          flash[:alert] = "Invalid username or password"
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @admin.errors, status: :unprocessable_entity }
         end

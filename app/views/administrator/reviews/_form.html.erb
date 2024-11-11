@@ -1,0 +1,66 @@
+<div>
+  <%= form_with(model: [:administrator, review]) do |form| %>
+    <% if review.errors.any? %>
+      <div class = "alert alert-danger">
+        <ul>
+          <% review.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <div class = "col-mb-3">
+    <%= form.label :title, style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :title, disabled: review.persisted?, class: "form-control" %>
+    </div>
+  </div>
+  <p></p>
+  <div class="col-mb-3">
+  <%= form.label :organizationID_id, "Organization", style: "display: block", class: "form-label" %>
+    <div class="input-group">
+      <% if review.persisted? %>
+        <%= form.text_field :organizationID_id, value: Organization.find_by(organizationId: review.organizationID_id)&.org_name, class: "form-control", disabled: true %>
+      <% else %>
+        <%= form.collection_select :organizationID_id, Organization.all, :organizationId, :org_name, {}, class: "form-control" %>
+      <% end %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :userID_id, "User", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :userID_id, disabled: review.persisted?, class: "form-control" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :comment, style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_area :comment, disabled: review.persisted?, class: "form-control" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :starValue, "Stars", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.number_field :starValue, disabled: review.persisted?, class: "form-control" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :reviewStatus, "Review Status", style: "display: block", class: "form-label" %>
+    <div class = "form-check form-switch">
+      <%= form.check_box :reviewStatus, class: "form-check-input", id: "flexSwitchCheckChecked", checked: review.reviewStatus %>
+      <%= form.label :reviewStatus, "Approved" %>
+    </div>
+  </div>
+  <p></p>
+    <% button_label = review.persisted? ? "Update Review" : "Create Review" %>
+    <% confirmation_message = review.persisted? ? "Are you sure you want to update this review?" : "Are you sure you want to create this review?" %>
+    
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <%= form.submit button_label, class: "btn btn-alogin btn-lg", onclick: "return confirm('#{confirmation_message}');" %>
+    </div>
+    <% end %>
+</div>

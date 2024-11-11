@@ -1,15 +1,25 @@
 class Review < ApplicationRecord
-    belongs_to :organization
-    belongs_to :user
-    belongs_to :admin
+    belongs_to :organization, foreign_key: :organizationID_id, primary_key: :organizationId, optional: false
+    belongs_to :user, foreign_key: :userID_id, primary_key: :username, optional: false
+    belongs_to :admin, foreign_key: :adminID_id, primary_key: :username, optional: :true
 
-    after_save :update_organization_avg_start_value
-    after_destroy :update_organization_avg_start_value
+    attr_accessor :require_user
+
+    after_update :admin_changes, if: :saved_change_to_reviewStatus?
+    after_save :update_organization_avg_starvalue
+    after_destroy :update_organization_avg_starvalue
 
     private
     
-    def update_organization_avg_start_value
-        avg_startValue = organization.reviews.where(reviewStatus: true).average(:startValue) || 0
-        organization.update(avg_startValue: avg_startValue)
+    def update_organization_avg_starvalue
+        avgStarValue = organization.reviews.where(reviewStatus: true).average(:starValue) || 0
+        organization.update(avgStarValue: avgStarValue)
     end
+
+    def admin_changes
+      if saved_change_to_reviewStatus?
+        self.adminID_id = Current.admin.username
+        save!
+      end
+    end  
 end

@@ -1,0 +1,27 @@
+<div>
+  <%= form_with(model: [:administrator, question]) do |form| %>
+    <% if question.errors.any? %>
+      <div class = "alert alert-danger">
+        <ul>
+          <% question.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :question, style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :question, class: "form-control", placeholder: "ex. Are you safe?" %>
+    </div>
+  </div>
+  <p></p>
+    <% button_label = question.persisted? ? "Update Question" : "Create Question" %>
+    <% confirmation_message = question.persisted? ? "Are you sure you want to update this question?" : "Are you sure you want to add this question?" %>
+    
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <%= form.submit button_label, class: "btn btn-alogin btn-lg", onclick: "return confirm('#{confirmation_message}');" %>
+    </div>
+    <% end %>
+</div>

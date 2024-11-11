@@ -1,0 +1,33 @@
+<h1 class = "text-center">Events</h1>
+<%= button_to "Create new event", new_administrator_event_path, method: :get, class: "btn btn-alogin btn-lg" %>
+<p></p>
+<div id="events">
+  <table class = "table events-table">
+    <thead>
+      <tr>
+        <th scope = "col"><strong>ID:</strong></th>
+        <th scope = "col"><strong>Title:</strong></th>
+        <th scope = "col"><strong>Date:</strong></th>
+        <th scope = "col"><strong>Time:</strong></th>
+        <th scope = "col"><strong>Street:</strong></th>
+        <th scope = "col"><strong>City:</strong></th>
+        <th scope = "col"><strong>State:</strong></th>
+        <th scope = "col"><strong>Zip Code:</strong></th>
+        <th scope = "col"><strong>Virtal:</strong></th>
+        <th scope = "col"><strong>Meeting Link:</strong></th>
+        <th scope = "col"><strong>Status:</strong></th>
+        <th scope = "col"><strong>Organization:</strong></th>
+        <th scope = "col"><strong>User:</strong></th>
+        <th scope = "col"><strong>Admin:</strong></th>
+        <th scope = "col"><strong>Description:</strong></th>
+        <th scope = "col"><strong>Created:</strong></th>
+        <th scope = "col"><strong>Last Update:</strong></th>    
+      </tr>
+    </thead>
+    <tbody class = "table-group-divider">
+      <% @events.each do |event| %>
+        <%= render partial: "event", locals: { event: event } %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
