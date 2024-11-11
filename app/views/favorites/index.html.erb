@@ -1,17 +1,138 @@
-<h1>Favorites</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites</title>
 
-<% if @favorites.any? %>
-  <% @favorites.each do |favorite| %>
-    <div>
-      <!-- Display organization name linked to the favorite -->
-      <%= link_to "View Organization: #{favorite.organization.org_name}", organization_path(favorite.organization) %> |
-      <!-- Link to edit this favorite -->
-      <%= link_to "Edit this favorite", edit_favorite_path(favorite) %> |
-      <!-- Button to destroy (delete) the favorite -->
-      <%= button_to "Destroy this favorite", favorite, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= stylesheet_link_tag 'card', media: 'all' %>
+    <%= javascript_include_tag 'favorites' %> <!-- Include the JavaScript for AJAX submission -->
+
+    <style>
+        /* Styling for the grid layout */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            gap: 20px;
+            margin-top: 20px;
+            max-width: 1200px; /* Optional: Set a max-width to avoid too wide of a display */
+            margin: 0 auto; /* Center the grid on the page */
+        }
+
+        /* Card styling */
+        .card {
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Star button styling */
+        .favorite-star {
+            background: none;
+            border: none; 
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #A4C3B2; /* Default color */
+            -webkit-text-stroke: 2px black; /* Solid black outline around the star */
+            transition: color 0.3s, -webkit-text-stroke 0.3s; /* Smooth transition */
+        }
+
+        .favorite-star.favorited {
+            color: black;
+            -webkit-text-stroke: 2px black; /* Keep black outline when favorited */
+        }
+
+        /* Style for all links */
+        a {
+            color: black !important; /* Make all links black */
+            text-decoration: none; /* Remove the underline */
+        }
+
+        /* Make all info buttons the same size */
+        .info-buttons button {
+            width: 100%; /* Make all buttons the same width */
+            box-sizing: border-box; /* Include padding and border in width/height calculation */
+        }
+
+        /* Optional: Style for hover effect */
+        .info-buttons button:hover {
+            background-color: #ddd; /* Example hover effect */
+        }
+
+        /* Align the star button to the right */
+        .contact-header {
+            display: flex;
+            justify-content: space-between; /* This will push the star button to the right */
+            align-items: center; /* Vertically align items */
+        }
+
+        .favorite {
+            margin-left: auto; /* Push the star button to the right side */
+        }
+
+        /* Responsive layout: Stack cards on small screens */
+        @media screen and (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr; /* Stack the cards on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="full_container">
+        <header>
+            <div class="header-container">
+                <h1>Favorites</h1>
+                <p>You have <%= @favorites.count %> favorite(s).</p> <!-- Count of favorites -->
+            </div>
+        </header>
+
+        <div class="card-grid">
+            <% if @favorites.any? %>
+                <% @favorites.each do |favorite| %> <!-- Loop through each favorite -->
+                    <div class="card">
+                        <h2><%= favorite.organization.org_name %></h2> 
+                        <div class="description">
+                            <p><%= favorite.organization.servicesSummary %></p>
+                        </div>
+
+                        <div class="contact-header">
+                            <!-- Favorite star button with AJAX form submission -->
+                            <div class="favorite">
+                                <%= form_with model: Favorite.new, url: favorites_path, method: :post, local: false do |f| %>
+                                    <%= f.hidden_field :organizationID_id, value: favorite.organization.organizationId %>
+                                    <%= f.submit "★", class: "favorite-star", title: "Add to Favorites" %>
+                                <% end %>
+                            </div>
+                        </div>
+
+                        <div class="info-buttons">
+                            <button class="add-button">
+                                <%= favorite.organization.street %>, <%= favorite.organization.city %>, <%= favorite.organization.org_state %> <%= favorite.organization.zipcode %>
+                            </button> <!-- Full Address in the Button -->
+                            <button class="phone-button"><%= favorite.organization.phoneNumber %></button> <!-- Phone Number -->
+                            <button class="web-button"><a href="<%= favorite.organization.webLink %>">Website</a></button> <!-- Website -->
+                        </div>
+
+                        <div class="actions">
+                            <!-- Button to destroy (delete) the favorite -->
+                            <%= button_to "Destroy this favorite", favorite, method: :delete, data: { confirm: 'Are you sure?' } %>
+                            
+                        </div>
+                    </div>
+                <% end %>
+            <% else %>
+                <p>You have no favorites yet.</p>
+            <% end %>
+        </div>
     </div>
-  <% end %>
-<% else %>
-  <p>You have no favorites yet.</p>
-<% end %>
 
+    <%= javascript_include_tag 'favorites' %> <!-- Include JavaScript for AJAX handling -->
+</body>
+</html>

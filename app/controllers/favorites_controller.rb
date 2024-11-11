@@ -30,12 +30,12 @@ class FavoritesController < ApplicationController
     
     if @favorite.save
       flash[:notice] = "Organization added to favorites!"
-      # Render a JS response to display a pop-up notification with a link to view favorites
-      render js: "alert('Organization added to favorites! Click OK to view your favorites.'); window.location = '#{favorites_path}'"
+      render json: { flash_notice: flash[:notice], redirect_url: favorites_path, favorite_added: true }
     else
       flash[:alert] = "Unable to add to favorites."
-      render js: "alert('Unable to add to favorites.');" # Show error via JS
+      render json: { flash_notice: flash[:alert], error: 'Unable to add to favorites.' }, status: :unprocessable_entity
     end
+    
   end
 
   # PATCH/PUT /favorites/1 or /favorites/1.json
@@ -57,7 +57,9 @@ class FavoritesController < ApplicationController
     
     respond_to do |format|
       format.html { redirect_to favorites_path, status: :see_other, notice: "Favorite was successfully destroyed." }
-      format.json { head :no_content }
+      format.json { 
+        render json: { flash_notice: "Favorite was successfully destroyed.", redirect_url: favorites_path }, status: :ok
+      }
     end
   end
 

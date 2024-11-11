@@ -5,7 +5,7 @@
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
-      text-align: center; 
+      /* Remove text-align: center to allow left alignment */
     }
 
     form {
@@ -66,6 +66,25 @@
       margin-top: 5px;
     }
 
+    .password-hints {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+      padding-left: 0;
+      display: block;
+      text-align: left; /* Ensure text is aligned to the left */
+    }
+
+    .password-hints ul {
+      padding-left: 20px; /* Make sure list items are indented */
+      list-style-type: disc;
+    }
+
+    .password-hints li {
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
     @media screen and (max-width: 300px) {
       .create-profile-btn {
          width: 100%; 
@@ -111,6 +130,18 @@
       <% if @user.errors[:password].any? %>
         <div class="field-with-errors"><%= @user.errors[:password].join(", ") %></div>
       <% end %>
+
+      <!-- Password Hints -->
+      <div class="password-hints">
+        <p>Your password must contain:</p>
+        <ul>
+          <li>At least one lowercase letter</li>
+          <li>At least one uppercase letter</li>
+          <li>At least one number</li>
+          <li>At least one special character</li>
+          <li>Minimum length of 8 characters</li>
+        </ul>
+      </div>
 
       <!-- Password Confirmation Field -->
       <label for="confirm_password"><b>Confirm Password</b></label>

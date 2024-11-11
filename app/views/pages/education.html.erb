@@ -6,6 +6,54 @@
     <title>Explore</title>
 
     <%= stylesheet_link_tag 'card', media: 'all' %>
+    <%= javascript_include_tag "favorites" %> <!-- Include the JavaScript for AJAX submission -->
+
+    <style>
+        /* Star button styling */
+        .favorite-star {
+            background: none;
+            border: none; 
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #A4C3B2; /* Default color */
+            -webkit-text-stroke: 2px black; /* Solid black outline around the star */
+            transition: color 0.3s, -webkit-text-stroke 0.3s; /* Smooth transition */
+        }
+
+        .favorite-star.favorited {
+            color: black;
+            -webkit-text-stroke: 2px black; /* Keep black outline when favorited */
+        }
+
+        /* Style for all links */
+        a {
+            color: black !important; /* Make all links black */
+            text-decoration: none; /* Remove the underline */
+        }
+
+        /* Make all info buttons the same size */
+        .info-buttons button {
+            width: 100%; /* Make all buttons the same width */
+            box-sizing: border-box; /* Include padding and border in width/height calculation */
+        }
+
+        /* Optional: Style for hover effect */
+        .info-buttons button:hover {
+            background-color: #ddd; /* Example hover effect */
+        }
+
+        /* Align the star button to the right */
+        .contact-header {
+            display: flex;
+            justify-content: space-between; /* This will push the star button to the right */
+            align-items: center; /* Vertically align items */
+        }
+
+        /* If you want to add some space between the content and the button */
+        .favorite {
+            margin-left: auto; /* Push the star button to the right side */
+        }
+    </style>
 </head>
 <body>
     <div class="full_container">
@@ -21,17 +69,23 @@
                 <h2><%= organization.org_name %></h2> 
                 <div class="description">
                     <p><%= organization.servicesSummary %></p> 
-                    <p><%= organization.street %>, <%= organization.city %>, <%= organization.org_state %> <%= organization.zipcode %></p> 
                 </div>
+
                 <div class="contact-header">
-                    <div class="contact-info">
-                        Phone: <%= organization.phoneNumber %> 
+                    <!-- Favorite star button with AJAX form submission -->
+                    <div class="favorite">
+                        <%= form_with model: Favorite.new, url: favorites_path, method: :post, local: false do |f| %>
+                            <%= f.hidden_field :organizationID_id, value: organization.organizationId %>
+                            <%= f.submit "★", class: "favorite-star", title: "Add to Favorites" %>
+                        <% end %>
                     </div>
-                    <div class="favorite">&#9733;</div> <!-- Star icon -->
                 </div>
 
                 <div class="info-buttons">
-                    <button class="add-button"><%= organization.street %></button> <!-- Address -->
+                    <!-- Address button showing full address -->
+                    <button class="add-button">
+                        <%= organization.street %>, <%= organization.city %>, <%= organization.org_state %> <%= organization.zipcode %>
+                    </button> <!-- Full Address in the Button -->
                     <button class="phone-button"><%= organization.phoneNumber %></button> <!-- Phone Number -->
                     <button class="web-button"><a href="<%= organization.webLink %>">Website</a></button> <!-- Website -->
                 </div>
@@ -39,5 +93,8 @@
             <% end %>
         </div>
     </div>
+
+    <!-- Include JavaScript for AJAX handling -->
+    <%= javascript_include_tag 'favorites' %>
 </body>
 </html>
