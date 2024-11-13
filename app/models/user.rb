@@ -35,10 +35,17 @@ class User < ApplicationRecord
   format: {
     with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}\z/,
     message: "must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character"
-  }
+    }, if: :password_required?
+
 
 
   private
+
+
+  # Only require password validation if creating a new record or if password is provided
+  def password_required?
+    new_record? || password.present?
+  end
 
   def downcase_email
     self.email = email.downcase

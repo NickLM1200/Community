@@ -1,16 +1,25 @@
 class UsersController < ApplicationController
+  # Define set_user before skipping
   before_action :set_user, only: %i[show edit update destroy]
+
+  # Skip set_user during logout action
+  skip_before_action :set_user, only: [:destroy]
+
+  # Callbacks for other actions
   before_action :set_current_user, only: %i[show edit update destroy]
 
   # GET /users or /users.json
   def index
-    # Render the login form here
     @user = User.new  # Initialize a new user for the login form
   end
 
   # GET /users/new
   def new
     @user = User.new
+  end
+
+  def edit
+    # @user is set by the before_action
   end
 
   # POST /users - Profile creation
@@ -44,19 +53,21 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/:username - Profile update
   def update
     respond_to do |format|
-      if @user.update(user_params.except(:username))
-        format.html { redirect_to user_path(username: @user.username), notice: "Profile successfully updated." }
+      if @user.update(user_params)
+        format.html { redirect_to user_path(@user), notice: "Profile successfully updated." }
       else
         flash.now[:alert] = @user.errors.full_messages.join(", ")
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
+  
 
   # DELETE /userlogout - Logout action
   def destroy
-    session[:user_username] = nil
-    redirect_to login_path, notice: "Successfully logged out."
+    session[:user_username] = nil  # Clear the session variable
+    reset_session                  # Clear all session data
+    redirect_to root_path, notice: "Successfully logged out."
   end
 
   private
@@ -74,6 +85,13 @@ class UsersController < ApplicationController
 
   # Permit trusted parameters
   def user_params
-    params.require(:user).permit(:username, :first_name, :email, :age_range, :password, :password_confirmation, :zipcode)
+    # Allow other attributes and conditionally include password fields if provided
+    params.require(:user).permit(:username, :first_name, :email, :age_range, :zipcode).tap do |user_params|
+      if params[:user][:password].present?
+        user_params[:password] = params[:user][:password]
+        user_params[:password_confirmation] = params[:user][:password_confirmation]
+      end
+    end
   end
+  
 end

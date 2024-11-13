@@ -1,10 +1,57 @@
-<h1>Editing user</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      background-color: #f3f3f3;
+      padding: 20px;
+    }
 
-<%= render "form", user: @user %>
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
 
-<br>
+    .button-link {
+      display: inline-block;
+      color: white;
+      background-color: #6B9080;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 35px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
 
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
-</div>
+    .button-link:hover {
+      background-color: #557a68;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Editing User</h1>
+
+    <!-- Render the user form -->
+    <%= render "form", user: @user %>
+
+    <!-- Back to Profile Page button-style link -->
+    <br>
+    <div>
+      <%= link_to "Back to Profile Page", @user, class: "button-link" %>
+    </div>
+  </div>
+</body>
+</html>

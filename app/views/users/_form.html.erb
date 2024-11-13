@@ -1,17 +1,128 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      background-color: #f3f3f3;
+      padding: 20px;
+    }
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    form {
+      border-radius: 35px;
+      border: 3px solid transparent;
+      padding: 16px;
+      background-color: #A4C3B2;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin: 0;
+      color: #333;
+    }
+
+    input[type=text], input[type=password], input[type=email] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 35px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button, .create-profile-btn, .login-btn {
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 35px;
+      background-color: #6B9080;
+      font-size: 16px;
+      margin-top: 20px; /* Adjust the value to increase or decrease the space */
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover, .create-profile-btn:hover, .login-btn:hover {
+      background-color: #557a68;
+    }
+
+    .container {
+      padding: 16px;
+      border-radius: 35px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .alert {
+      color: red;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .field-with-errors {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    @media screen and (max-width: 400px) {
+      form {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <%= form_with(model: user, local: true) do |form| %>
+    <div class="container">
+      <% if user.errors.any? %>
+        <div class="alert">
+          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+          <ul>
+            <% user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <label for="username">Username</label>
+      <%= form.text_field :username, class: "form-control", required: true %>
+
+      <label for="first_name">First Name</label>
+      <%= form.text_field :first_name, class: "form-control" %>
+
+      <label for="email">Email</label>
+      <%= form.email_field :email, class: "form-control" %>
+
+      <label for="age_range">Age Range</label>
+      <%= form.text_field :age_range, class: "form-control" %>
+
+      <label for="password">Password</label>
+      <%= form.password_field :password, placeholder: "(leave blank if you don’t want to change it)", class: "form-control" %>
+
+      <label for="password_confirmation">Password Confirmation</label>
+      <%= form.password_field :password_confirmation, placeholder: "(only fill in if you want to change your password)", class: "form-control" %>
+
+      <label for="zipcode">Zipcode</label>
+      <%= form.text_field :zipcode, class: "form-control" %>
+
+      <!-- Update User button with the same styling as other buttons -->
+      <%= form.submit "Update User", class: "login-btn" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</body>
+</html>

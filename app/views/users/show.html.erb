@@ -1,8 +1,130 @@
-<%= render @user %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <%= stylesheet_link_tag 'application', media: 'all' %>  <!-- Include the application styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+        /* Profile container */
+        .profile-container {
+            display: flex;
+            justify-content: flex-start;
+            gap: 80px;
+            padding: 20px;
+        }
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
-</div>
+        /* User info card styling */
+        .user-info {
+            background-color: #A4C3B2; /* Light green background */
+            color: black;
+            padding: 50px;
+            width: 40%;
+            border-radius: 30px;
+            margin-left: 40px;  /* Adds space on the left side, pushing the card to the right */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info h2 {
+            margin-top: 0;
+            font-size: 30px;
+            margin-bottom: 35px; /* Add margin to create space below the first name */
+        }
+
+        .user-info p {
+            font-size: 17px;
+            margin: 20px 0;
+        }
+
+        /* Action buttons section */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            width: 35%;
+            text-align: center;
+        }
+
+        /* Button Styling */
+        .action-buttons button, .action-buttons a, .favorites-btn {
+            width: 100%;  /* Full width button */
+            padding: 15px; 
+            font-size: 16px; /* Larger text for a more prominent button */
+            background-color: #6B9080;  /* Slightly darker green than the card */
+            border: none;
+            border-radius: 30px;  /* Rounded edges */
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            box-sizing: border-box; /* Include padding in width calculation */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Hover effect for buttons */
+        .action-buttons button:hover, .action-buttons a:hover, .favorites-btn:hover {
+            background-color: #ddd; /* Slightly darker on hover */
+        }
+
+        .favorites-btn-container {
+           margin-top: 20px; /* Adjust the value to increase or decrease the space */
+           display: flex;
+           justify-content: flex-start;
+           width: 100%;
+           text-align: center;
+           }
+
+        .favorites-btn {
+           width: 440px !important;  /* Set the button width and force it to take effect */
+           max-width: none;
+           padding: 15px;
+           font-size: 16px;
+           background-color: #6B9080;
+           border: none;
+           border-radius: 30px;
+           color: white;
+           box-sizing: border-box;
+           margin-left: 90px;  /* Adds space on the left side, pushing the card to the right */
+           transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- Left Section: User Info -->
+        <div class="user-info">
+            <h2><%= @current_user.first_name %></h2> <!-- Display user's first name -->
+
+            <p><strong>Email:</strong> <%= @current_user.email %></p> <!-- Display user's email -->
+            <p><strong>Age:</strong> <%= @current_user.age_range %></p> <!-- Display user's age range -->
+            <p><strong>Zipcode:</strong> <%= @current_user.zipcode %></p> <!-- Display user's zipcode -->
+        </div>
+
+        <!-- Right Section: Action Buttons -->
+        <div class="action-buttons">
+            <%= link_to 'Edit Profile', edit_user_path(@current_user), class: 'btn' %>  <!-- Edit profile link -->
+            <%= link_to 'Change Account', users_path, class: 'btn' %>  <!-- Back to users list link -->
+            
+            <%= button_to 'Delete Account', @current_user, method: :delete, data: { confirm: "Are you sure you want to delete your account?" }, class: 'btn' %>  <!-- Delete account button -->
+            
+            <%= link_to 'Logout', userlogout_path, method: :delete, class: 'btn' if session[:user_username] %>  <!-- Logout link -->
+        </div>
+    </div>
+
+    <!-- New Favorites Button Section Below User Info -->
+    <div class="favorites-btn-container">
+        <%= link_to 'Go to Favorites', favorites_path, class: 'favorites-btn' %> <!-- Link to Favorites page -->
+    </div>
+
+    <!-- Include JavaScript for AJAX handling (if needed) -->
+    <%= javascript_include_tag 'favorites' %>
+</body>
+</html>
