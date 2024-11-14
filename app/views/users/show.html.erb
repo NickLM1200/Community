@@ -102,7 +102,7 @@
         <!-- Left Section: User Info -->
         <div class="user-info">
             <h2><%= @current_user.first_name %></h2> <!-- Display user's first name -->
-
+              <p><strong>Username:</strong> <%= @current_user.username %></p> <!-- Display user's username -->
             <p><strong>Email:</strong> <%= @current_user.email %></p> <!-- Display user's email -->
             <p><strong>Age:</strong> <%= @current_user.age_range %></p> <!-- Display user's age range -->
             <p><strong>Zipcode:</strong> <%= @current_user.zipcode %></p> <!-- Display user's zipcode -->

@@ -19,12 +19,22 @@ class User < ApplicationRecord
   before_destroy :prevent_base_user_destruction
   before_update :prevent_base_user_changes
 
+  # Update associated records when the username changes
+  after_update :update_references, if: :username_changed?
+
+  def update_references
+    favorites.update_all(userID_id: username)
+    reviews.update_all(userID_id: username)
+    surveys.update_all(userID_id: username)
+    # Add other associated models here if needed
+  end
+  
+
   # Validation for a valid email format
   validates :email, format: { with: Devise.email_regexp, message: "Please use a valid email" }
 
   # Validations for username and email
-  validates :username, presence: true, uniqueness: { case_sensitive: false }
-  validates :username, length: { maximum: 15, message: "Username is too long. It should be 15 characters or fewer." }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 15, message: "Username is too long. It should be 15 characters or fewer." }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
   # Validation for the presence of required fields

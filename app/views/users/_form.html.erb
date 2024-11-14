@@ -27,7 +27,7 @@
       color: #333;
     }
 
-    input[type=text], input[type=password], input[type=email] {
+    input[type=text], input[type=password], input[type=email], input[type=number], select {
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -83,6 +83,28 @@
         padding: 12px;
       }
     }
+
+    .password-hints {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+      padding-left: 0;
+      display: block;
+      text-align: left;
+    }
+
+  .password-hints ul {
+      padding-left: 20px;
+      list-style-type: disc;
+      list-style-type: disc;
+    }
+
+  .password-hints li {
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+
   </style>
 </head>
 <body>
@@ -109,13 +131,25 @@
       <%= form.email_field :email, class: "form-control" %>
 
       <label for="age_range">Age Range</label>
-      <%= form.text_field :age_range, class: "form-control" %>
+      <%= form.select :age_range, options_for_select([['Under 18', 'Under 18'], ['18-24', '18-24'], ['25-34', '25-34'], ['35-44', '35-44'], ['45-54', '45-54'], ['55-64', '55-64'], ['65 and over', '65 and over']]), { prompt: "Select Age Range" }, required: true %>
 
       <label for="password">Password</label>
       <%= form.password_field :password, placeholder: "(leave blank if you don’t want to change it)", class: "form-control" %>
 
+      <div class="password-hints">
+        <p>Your password must contain:</p>
+        <ul>
+          <li>At least one lowercase letter</li>
+          <li>At least one uppercase letter</li>
+          <li>At least one number</li>
+          <li>At least one special character</li>
+          <li>Minimum length of 8 characters</li>
+        </ul>
+      </div>
+
       <label for="password_confirmation">Password Confirmation</label>
       <%= form.password_field :password_confirmation, placeholder: "(only fill in if you want to change your password)", class: "form-control" %>
+
 
       <label for="zipcode">Zipcode</label>
       <%= form.text_field :zipcode, class: "form-control" %>

@@ -54,6 +54,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        @user.update_references
         format.html { redirect_to user_path(@user), notice: "Profile successfully updated." }
       else
         flash.now[:alert] = @user.errors.full_messages.join(", ")
@@ -86,7 +87,7 @@ class UsersController < ApplicationController
   # Permit trusted parameters
   def user_params
     # Allow other attributes and conditionally include password fields if provided
-    params.require(:user).permit(:username, :first_name, :email, :age_range, :zipcode).tap do |user_params|
+    params.require(:user).permit(:username, :first_name, :email, :age_range, :zipcode, :password, :password_confirmation).tap do |user_params|
       if params[:user][:password].present?
         user_params[:password] = params[:user][:password]
         user_params[:password_confirmation] = params[:user][:password_confirmation]
