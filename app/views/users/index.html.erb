@@ -94,7 +94,7 @@
   </style>
 </head>
 <body>
-  <%= form_with(url: userlogin_path, local: true) do |form| %>
+  <%= form_with(url: login_path, local: true) do |form| %>
     <div class="container">
       <!-- Display flash alert for login errors -->
       <% if flash.now[:alert] %>
@@ -103,9 +103,9 @@
 
       <!-- Username Field -->
       <label for="username"><b>Username</b></label>
-      <%= form.text_field :username, placeholder: "Enter Username", required: true, class: "form-control" %>
-      <% if @user && @user.errors[:username].any? %>
-        <div class="field-with-errors"><%= @user.errors[:username].join(", ") %></div>
+      <%= form.text_field :user_username, placeholder: "Enter Username", required: true, class: "form-control" %>
+      <% if @user && @user.errors[:user_username].any? %>
+        <div class="field-with-errors"><%= @user.errors[:user_username].join(", ") %></div>
       <% end %>
 
       <!-- Password Field -->

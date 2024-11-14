@@ -55,7 +55,7 @@ module Administrator
       end
     end
 
-    # DELETE /userlogout - Logout action
+    # DELETE /logout - Logout action
     def destroy
       if @user.destroy
         respond_to do |format|

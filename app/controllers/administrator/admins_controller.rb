@@ -65,8 +65,8 @@ module Administrator
 
     # DELETE /admins/1 or /admins/1.json
     def destroy
-      if session[:username] == @admin.username
-        session[:username] = nil
+      if session[:admin_username] == @admin.username
+        session[:admin_username] = nil
       end
       if @admin.destroy
         respond_to do |format|

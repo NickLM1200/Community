@@ -48,3 +48,13 @@
   .text-content {
     font-size: 16px; /* Default size */
   }
+
+  .custom-dropdown-bg {
+    background-color: #A4C3B2 !important;
+    border: none !important;
+  }
+
+  .custom-dropdown-bg .dropdown-item:hover {
+    color: inherit !important;
+    background-color: transparent !important;
+  }

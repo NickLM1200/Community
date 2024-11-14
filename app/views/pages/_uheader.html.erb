@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #A4C3B2;">
+  <div class="container"> <!-- Add container to center and add margins -->
+    <%= link_to root_path, class: 'navbar-brand' do %>
+      <%= image_tag '14.png', alt: 'COmmunity Logo', class: 'logo-img' %>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to 'Events', events_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Explore', pages_explore_path, class: 'nav-link' %>
+        </li>
+        <% if logged_in? %>
+          <li class="nav-item">
+            <%= link_to 'Recommendations', "#", class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'About Us', pages_about_us_path, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'About Us', pages_about_us_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Log In', users_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Create a profile', new_user_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+      <% if logged_in? %>
+        <ul class="navbar-nav ms-auto"> <!-- ms-auto pushes this to the right -->
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="accountDropdown" role="button" data-bs-toggle="dropdown">
+              Account
+            </a>
+            <ul class="dropdown-menu custom-dropdown-bg" aria-labelledby="accountDropdown">
+              <li><%= link_to 'Profile', "#", class: 'dropdown-item' %></li>
+              <li><%= link_to 'Dependents', "#", class: 'dropdown-item' %></li>
+              <li><%= link_to 'Favorites', "#", class: 'dropdown-item' %></li>
+              <li><%= link_to 'Surveys', "#", class: 'dropdown-item' %></li>
+              <li><%= link_to 'Settings', "#", class: 'dropdown-item' %></li>
+              <li><%= link_to 'Logout', logout_path, method: :delete, class: 'dropdown-item' %></li>
+            </ul>
+          </li>
+        </ul>
+      <% end %>
+      <form class="d-flex ms-3" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

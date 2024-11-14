@@ -34,9 +34,6 @@ Rails.application.routes.draw do
 
   get 'pages/explore'
 
-  get 'login', to: 'users#index'
-  get 'users/new'
-
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -56,7 +53,7 @@ Rails.application.routes.draw do
   delete "adminlogout", to: "administrator/asession#destroy"
 
   # User session management
-  get "login", to: "users#index"       # Use the index action for displaying login form
-  post "userlogin", to: "users#login"  # Use the new login action for logging in
-  delete "userlogout", to: "users#destroy" # Use the destroy action for user logout
+  get "login", to: "sessions#new", as: :login   # Use the index action for displaying login form
+  post "login", to: "sessions#create"  # Use the new login action for logging in
+  delete "logout", to: "sessions#destroy", as: :logout # Use the destroy action for user logout
 end

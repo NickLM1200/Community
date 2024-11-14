@@ -8,8 +8,8 @@ module Administrator
     include Administrator::OrganizationsHelper
 
     def set_current_admin
-      if session[:username]
-        Current.admin = Admin.find_by(username: session[:username])
+      if session[:admin_username]
+        Current.admin = Admin.find_by(username: session[:admin_username])
       else
         redirect_to adminaccess_path
       end

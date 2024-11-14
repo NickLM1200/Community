@@ -1,13 +1,13 @@
 module Administrator
   class AsessionController < Administrator::BaseController
     def new
-      if session[:username]
-        Current.admin = Admin.find_by(username: session[:username])
+      if session[:admin_username]
+        Current.admin = Admin.find_by(username: session[:admin_username])
           if Current.admin
-            session[:username] = Current.admin.username
+            session[:admin_username] = Current.admin.username
             redirect_to admindashboard_path
           else
-            session[:username] = nil
+            session[:admin_username] = nil
             render :new
           end
         else
@@ -16,11 +16,11 @@ module Administrator
     end
 
     def create
-      @admin = Admin.find_by(username: params[:username])
+      @admin = Admin.find_by(username: params[:admin_username])
 
       respond_to do |format|
         if @admin.present? && @admin.authenticate(params[:password])      
-          session[:username] = @admin.username
+          session[:admin_username] = @admin.username
           format.html {redirect_to admindashboard_path }
           format.json { render json: @admin.errors, status: :unprocessable_entity }
         else
@@ -32,7 +32,7 @@ module Administrator
     end
 
     def destroy
-      reset_session
+      session[:admin_username] = nil
 
       respond_to do |format|
         format.html { redirect_to adminaccess_path, notice: "Logged out successfully"}

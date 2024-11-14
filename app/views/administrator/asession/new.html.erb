@@ -3,9 +3,9 @@
 <div>
   <%= form_with url: adminaccess_path do |form| %>
     <div class = "mb-3">
-      <%= form.label :username, style: "display: block" %>
+      <%= form.label :admin_username, "Username", style: "display: block" %>
       <div class = "input-group">
-        <%= form.text_field :username, class: "form-control", id: "usernamefield", placeholder: "Username" %>
+        <%= form.text_field :admin_username, class: "form-control", id: "usernamefield", placeholder: "Username" %>
         <span class="input-group-text">
           <i class="bi bi-person-vcard"></i>
         </span>
