@@ -101,21 +101,22 @@
     <div class="profile-container">
         <!-- Left Section: User Info -->
         <div class="user-info">
-            <h2><%= @current_user.first_name %></h2> <!-- Display user's first name -->
-              <p><strong>Username:</strong> <%= @current_user.username %></p> <!-- Display user's username -->
-            <p><strong>Email:</strong> <%= @current_user.email %></p> <!-- Display user's email -->
-            <p><strong>Age:</strong> <%= @current_user.age_range %></p> <!-- Display user's age range -->
-            <p><strong>Zipcode:</strong> <%= @current_user.zipcode %></p> <!-- Display user's zipcode -->
+            <h2><%= @user.first_name %></h2> <!-- Display user's first name -->
+              <p><strong>Username:</strong> <%= @user.username %></p> <!-- Display user's username -->
+            <p><strong>Email:</strong> <%= @user.email %></p> <!-- Display user's email -->
+            <p><strong>Age:</strong> <%= @user.age_range %></p> <!-- Display user's age range -->
+            <p><strong>Zipcode:</strong> <%= @user.zipcode %></p> <!-- Display user's zipcode -->
         </div>
 
         <!-- Right Section: Action Buttons -->
         <div class="action-buttons">
-            <%= link_to 'Edit Profile', edit_user_path(@current_user), class: 'btn' %>  <!-- Edit profile link -->
+            <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn' %>  <!-- Edit profile link -->
             <%= link_to 'Change Account', users_path, class: 'btn' %>  <!-- Back to users list link -->
             
-            <%= button_to 'Delete Account', @current_user, method: :delete, data: { confirm: "Are you sure you want to delete your account?" }, class: 'btn' %>  <!-- Delete account button -->
+            <%= button_to 'Delete Account', user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete your account?" }, class: 'btn' %>
+
             
-            <%= link_to 'Logout', userlogout_path, method: :delete, class: 'btn' if session[:user_username] %>  <!-- Logout link -->
+            <%= link_to 'Logout', logout_path, method: :delete, class: 'btn' if session[:user_username] %>  <!-- Logout link -->
         </div>
     </div>
 

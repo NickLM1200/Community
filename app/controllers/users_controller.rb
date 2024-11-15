@@ -2,9 +2,6 @@ class UsersController < ApplicationController
   # Define set_user before skipping
   before_action :set_user, only: %i[show edit update destroy]
 
-  # Skip set_user during logout action
-  skip_before_action :set_user, only: [:destroy]
-
   # Callbacks for other actions
   before_action :set_current_user, only: %i[show edit update destroy]
 
