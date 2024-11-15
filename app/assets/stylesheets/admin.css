@@ -106,6 +106,26 @@
   text-overflow: ellipsis;
 }
 
+.password-hints {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+  padding-left: 0;
+  display: block;
+  text-align: left;
+}
+
+.password-hints ul {
+  padding-left: 20px;
+  list-style-type: disc;
+  list-style-type: disc;
+}
+
+.password-hints li {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
 /* Optional: Make table responsive on smaller screens */
 @media (max-width: 768px) {
   .events-table th, .events-table td {
