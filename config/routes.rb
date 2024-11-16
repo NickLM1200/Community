@@ -13,14 +13,22 @@ Rails.application.routes.draw do
     resources :surveys
     resources :users
   end
+
+
   resources :favorites
-  resources :reviews
+
+  resources :organizations do
+    resources :reviews, only: [:index, :new, :create]  # Allow adding and viewing reviews for organizations
+    member do
+      get 'explore', to: 'pages#explore', as: 'explore'
+    end
+  end
+
   resources :surveys, only: [:create]
   resources :dependents
   resources :questions
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :events
-  resources :organizations
   
   root "pages#home"
   get 'pages/home'

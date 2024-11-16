@@ -1,17 +1,17 @@
-<%= form_with(model: review) do |form| %>
-  <% if review.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+<%= form_with model: @review, url: organization_reviews_path(params[:organization_id]), local: true do |f| %>
+  <%= f.hidden_field :organizationID_id, value: params[:organization_id] %>
+  
+  <div class="star-rating">
+    <%= f.label :starValue, "Rate this organization (1-5 stars)" %>
+    <%= f.number_field :starValue, in: 1..5, step: 1, required: true %>
+  </div>
 
-      <ul>
-        <% review.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="review-comment">
+    <%= f.label :comment, "Write your review:" %>
+    <%= f.text_area :comment, placeholder: "Add your comments here", rows: 4 %>
+  </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="actions">
+    <%= f.submit "Submit Review" %>
   </div>
 <% end %>

@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #A4C3B2;">
+  <div class="container"> <!-- Add container to center and add margins -->
+    <%= link_to root_path, class: 'navbar-brand' do %>
+      <%= image_tag '14.png', alt: 'COmmunity Logo', class: 'logo-img' %>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <%= link_to 'Events', events_path, class: 'nav-link' %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Explore', pages_explore_path, class: 'nav-link' %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Recommendations', "#", class: 'nav-link' %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'About Us', pages_about_us_path, class: 'nav-link' %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Account', "#", class: 'nav-link' %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Log out', "#", class: 'nav-link' %>
+        </li>
+
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

@@ -1,8 +1,4 @@
-<%= render @review %>
-
-<div>
-  <%= link_to "Edit this review", edit_review_path(@review) %> |
-  <%= link_to "Back to reviews", reviews_path %>
-
-  <%= button_to "Destroy this review", @review, method: :delete %>
+<div class="review">
+  <p><strong>Rating:</strong> <%= review.starValue %> / 5</p>
+  <p><strong>Review:</strong> <%= review.content %></p> <!-- Example review content -->
 </div>

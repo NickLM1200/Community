@@ -1,9 +1,129 @@
-<h1>New review</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-<%= render "form", review: @review %>
+    form {
+      border-radius: 35px; 
+      border: 3px solid transparent; 
+      padding: 16px; 
+      background-color: #A4C3B2; 
+      max-width: 600px; 
+      width: 100%; 
+      margin: 0 auto; 
+    }
 
-<br>
+    h1 {
+      text-align: center; 
+      margin: 0; 
+    }
 
-<div>
-  <%= link_to "Back to reviews", reviews_path %>
-</div>
+    input[type=text], input[type=password], input[type=email], input[type=number], select, textarea {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 35px; 
+    }
+
+    .submit-review-btn {
+      color: white;
+      padding: 14px 20px;
+      margin: 0; 
+      border: none;
+      cursor: pointer;
+      border-radius: 35px;
+      background-color: #6B9080; 
+      width: 160px; 
+      margin-top: 20px;
+    }
+
+    .submit-review-btn:hover {
+      background-color: #ddd;  /* Darker green on hover */
+    }
+
+    .container {
+      padding: 16px;
+      border-radius: 35px;
+    }
+
+    label {
+      display: block; 
+      text-align: left; 
+      margin-top: 10px; 
+    }
+
+    .star-rating {
+      margin-top: 20px;
+    }
+
+    .review-comment {
+      margin-top: 20px;
+    }
+
+    .field-with-errors {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .password-hints {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+      padding-left: 0;
+      display: block;
+      text-align: left;
+    }
+
+    .password-hints ul {
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+
+    .password-hints li {
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    @media screen and (max-width: 300px) {
+      .submit-review-btn {
+         width: 100%; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <%= form_with model: @review, url: organization_reviews_path, local: true do |f| %>
+    <div class="container">
+      <!-- Organization ID (hidden field) -->
+      <%= f.hidden_field :organizationID_id, value: params[:organization_id] %>
+
+      <!-- Star Rating -->
+      <div class="star-rating">
+        <%= f.label :starValue, "Rate this organization:" %>
+        <%= f.number_field :starValue, in: 1..5, step: 1, class: "star-rating-input", placeholder: "Rate (1-5)" %>
+      </div>
+
+      <!-- Review Comment (Input design same as Star Rating) -->
+      <div class="review-comment">
+        <%= f.label :comment, "Write your review:" %>
+        <%= f.text_area :comment, placeholder: "Write your review here...", rows: 6, class: "star-rating-input" %> <!-- Taller text area -->
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <%= f.submit "Submit Review", class: "submit-review-btn" %>
+      </div>
+    </div>
+  <% end %>
+
+</body>
+</html>

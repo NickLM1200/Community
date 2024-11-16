@@ -1,10 +1,11 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[ show edit update destroy ]
-  before_action :require_login
+  before_action :set_review, only: %i[show edit update destroy]
+  before_action :require_login, only: [:create, :new]
 
   # GET /reviews or /reviews.json
   def index
-    @reviews = Review.all
+    @organization = Organization.find(params[:organization_id])
+    @reviews = @organization.reviews.where(reviewStatus: true) # Show only approved reviews
   end
 
   # GET /reviews/1 or /reviews/1.json
@@ -22,18 +23,25 @@ class ReviewsController < ApplicationController
 
   # POST /reviews or /reviews.json
   def create
+    Rails.logger.info "Current user: #{current_user&.inspect}"
+    Rails.logger.info "Session: #{session.to_hash}"
+  
+    if current_user.nil?
+      redirect_to login_path, alert: "You must be logged in to submit a review."
+      return
+    end
+  
     @review = Review.new(review_params)
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to @review, notice: "Review was successfully created." }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    @review.userID_id = current_user.username
+    @review.reviewStatus = true
+  
+    if @review.save
+      redirect_to organization_reviews_path(@review.organizationID_id), notice: "Review submitted successfully!"
+    else
+      render :new, status: :unprocessable_entity
     end
   end
+  
 
   # PATCH/PUT /reviews/1 or /reviews/1.json
   def update
@@ -59,6 +67,7 @@ class ReviewsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_review
       @review = Review.find(params[:id])
@@ -66,6 +75,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.fetch(:review, {})
+      params.require(:review).permit(:starValue, :organizationID_id, :userID_id, :reviewStatus, :comment)
     end
 end

@@ -25,6 +25,12 @@
             -webkit-text-stroke: 2px black; /* Keep black outline when favorited */
         }
 
+        /* Hover effect for rating buttons */
+        .favorite-star:hover {
+            color: #FFD700; /* Change color to gold on hover */
+            -webkit-text-stroke: 2px #FFD700; /* Outline becomes gold on hover */
+        }
+
         /* Style for all links */
         a {
             color: black !important; /* Make all links black */
@@ -53,6 +59,41 @@
         .favorite {
             margin-left: auto; /* Push the star button to the right side */
         }
+
+        /* Style for the "Rate this organization" link */
+        .rate-link {
+            color: white;
+            background-color: #6B9080;
+            padding: 10px 16px;
+            border-radius: 15px;
+            text-decoration: none; /* Remove underline by default */
+            transition: all 0.3s ease; /* Smooth transition for all changes */
+        }
+
+        /* Hover effect for the "Rate this organization" button */
+        .rate-link:hover {
+            background-color: #ddd; /* Darker background on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+        }
+
+        /* Style for show reviews link hover */
+        .show-reviews-link {
+            color: black;
+            text-decoration: underline; /* Underline applied by default */
+            text-decoration-thickness: 2px; /* Set underline thickness */
+            text-decoration-color: #6B9080; /* Set underline color */
+            text-underline-offset: 6px; /* Space between text and underline */
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Styling for show reviews link hover */
+        .show-reviews-link:hover {
+            text-decoration-thickness: 3px; /* Thicker underline on hover */
+            text-decoration-color: #A4C3B2; /* Underline color on hover */
+            text-underline-offset: 8px; /* More space on hover */
+        }
     </style>
 </head>
 <body>
@@ -71,12 +112,32 @@
                     <p><%= organization.servicesSummary %></p> 
                 </div>
 
+                <!-- Display Average Rating -->
+                <div class="rating-display">
+                    <p>
+                    <strong>Average Rating:</strong> 
+                    <% if organization.reviews.any? %>
+                      <%= organization.reviews.average(:starValue).to_f.round(2) %> / 5
+                    <% else %>
+                      No reviews yet
+                    <% end %>
+                  </p>
+                </div>
+
+                <!-- Links for rating and reviews -->
+                <div class="links">
+                  <%= link_to 'Rate this organization', new_organization_review_path(organization_id: organization.organizationId), 
+                    class: 'rate-link' %>
+                  <%= link_to 'Show Reviews', organization_reviews_path(organization.organizationId), 
+                    class: 'show-reviews-link' %>
+                </div>
+
                 <div class="contact-header">
                     <!-- Favorite star button with AJAX form submission -->
                     <div class="favorite">
                         <%= form_with model: Favorite.new, url: favorites_path, method: :post, local: false do |f| %>
                             <%= f.hidden_field :organizationID_id, value: organization.organizationId %>
-                            <%= f.submit "★", class: "favorite-star", title: "Add to Favorites" %>
+                            <%= f.submit "★", class: "favorite-star", title: "Add to Favorites", data: { confirm: 'Are you sure you want to add this organization to your favorites?' } %>
                         <% end %>
                     </div>
                 </div>

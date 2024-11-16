@@ -112,10 +112,7 @@
         <div class="action-buttons">
             <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn' %>  <!-- Edit profile link -->
             <%= link_to 'Change Account', users_path, class: 'btn' %>  <!-- Back to users list link -->
-            
             <%= button_to 'Delete Account', user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete your account?" }, class: 'btn' %>
-
-            
             <%= link_to 'Logout', logout_path, method: :delete, class: 'btn' if session[:user_username] %>  <!-- Logout link -->
         </div>
     </div>

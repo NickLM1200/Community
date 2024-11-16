@@ -5,26 +5,26 @@ class PagesController < ApplicationController
   end
   
   def food
-    @organizations = Organization.all
+    @organizations = Organization.order(:organizationId) # Replace `organizationID` with the correct column name
   end
 
   def housing
-    @organizations = Organization.all
+    @organizations = Organization.order(:organizationId)
   end
 
   def healthcare
-    @organizations = Organization.all
+    @organizations = Organization.order(:organizationId)
   end
 
   def education
-    @organizations = Organization.all
+    @organizations = Organization.order(:organizationId)
   end
 
   def childcare
-    @organizations = Organization.all
+    @organizations = Organization.order(:organizationId)
   end
 
   def legal_resources
-    @organizations = Organization.all
+    @organizations = Organization.order(:organizationId)
   end
 end

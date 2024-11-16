@@ -9,6 +9,10 @@ class Review < ApplicationRecord
     after_save :update_organization_avg_starvalue
     after_destroy :update_organization_avg_starvalue
 
+    validates :starValue, presence: true, inclusion: { in: 1..5, message: "must be between 1 and 5" }
+    validates :organizationID_id, presence: true
+
+
     private
     
     def update_organization_avg_starvalue

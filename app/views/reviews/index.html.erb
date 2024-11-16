@@ -1,12 +1,36 @@
-<h1>Reviews</h1>
+<h2>Reviews for <%= @organization.org_name %></h2>
 
-<div id="reviews">
-  <% @reviews.each do |review| %>
-    <%= render review %>
-    <p>
-      <%= link_to "Show this review", review %>
-    </p>
-  <% end %>
-</div>
+<p><strong>Total Reviews:</strong> <%= @reviews.count %></p>
+<hr style="border: none; border-top: 1px solid #b7b7b7; margin: 10px 0;"> <!-- Light gray separator -->
 
-<%= link_to "New review", new_review_path %>
+<% @reviews.each do |review| %>
+  <div class="review" style="margin-left: 40px;">
+    <p><strong><%= review.userID_id %> rated it <%= review.starValue %> stars</strong></p>
+    <% if review.comment.present? %>
+      <p><%= review.comment %></p>
+    <% else %>
+      <p><em>No comment provided.</em></p>
+    <% end %>
+    <p><em>Reviewed on <%= review.created_at.to_date %></em></p>
+  </div>
+  <hr style="border: none; border-top: 1px solid #b7b7b7; margin: 20px 0;"> <!-- Light gray separator -->
+<% end %>
+
+<%= link_to 'Go Back to Explore', explore_organization_path(@organization), class: 'btn' %>
+
+<style>
+  .btn {
+    background-color: #A4C3B2;  /* Green color */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 25px;  /* Rounded button */
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  .btn:hover {
+    background-color: #ddd;  /* Darker green on hover */
+  }
+</style>
