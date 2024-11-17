@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # get 'password_resets/new'
+  # get 'password_resets/create'
+  # get 'password_resets/edit'
+  # get 'password_resets/update'
   get 'pages/about_us'
   get 'pages/survey'
 
@@ -29,7 +33,8 @@ Rails.application.routes.draw do
   resources :questions
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :events
-  
+  resources :organizations
+  resources :password_resets, only: [:new, :create, :edit, :update]
   root "pages#home"
   get 'pages/home'
 
@@ -64,4 +69,19 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new", as: :login   # Use the index action for displaying login form
   post "login", to: "sessions#create"  # Use the new login action for logging in
   delete "logout", to: "sessions#destroy", as: :logout # Use the destroy action for user logout
+
+  get 'forgot_password', to: 'password_resets#new', as: :forgot_password
+  #get 'password_resets/:user_id/edit/:token', to: 'password_resets#edit', as: :edit_password_reset
+  #get 'password_resets/:user_id/edit/:token', to: 'password_resets#edit', as: :custom_edit_password_reset
+  #match 'password_resets/:user_id/edit/:token', to: 'password_resets#edit', via: [:get, :patch], as: :custom_edit_password_reset
+  
+  # Edit route for the GET request to display the form
+  get 'password_resets/:user_id/edit/:token', to: 'password_resets#edit', as: :custom_edit_password_reset
+
+  # Update route for the PATCH request to submit the form and update the password
+  patch 'password_resets/:user_id/edit/:token', to: 'password_resets#update'
+
+
+
+
 end

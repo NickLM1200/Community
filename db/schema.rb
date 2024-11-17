@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_29_215645) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +94,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_29_215645) do
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
+  create_table "password_resets", force: :cascade do |t|
+    t.string "user_id", null: false
+    t.string "reset_digest", null: false
+    t.datetime "reset_sent_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_password_resets_on_user_id"
+  end
+
   create_table "question_answer_rels", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -151,6 +160,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_29_215645) do
   add_foreign_key "events", "users", primary_key: "username"
   add_foreign_key "favorites", "organizations", column: "organizationID_id", primary_key: "organizationId"
   add_foreign_key "favorites", "users", column: "userID_id", primary_key: "username"
+  add_foreign_key "password_resets", "users", primary_key: "username"
   add_foreign_key "reviews", "admins", column: "adminID_id", primary_key: "username", on_delete: :nullify
   add_foreign_key "reviews", "organizations", column: "organizationID_id", primary_key: "organizationId"
   add_foreign_key "reviews", "users", column: "userID_id", primary_key: "username"
