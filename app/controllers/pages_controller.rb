@@ -5,26 +5,26 @@ class PagesController < ApplicationController
   end
   
   def food
-    @organizations = Organization.order(:organizationId) # Replace `organizationID` with the correct column name
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'FOOD' })
   end
 
   def housing
-    @organizations = Organization.order(:organizationId)
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'HSG' })
   end
 
   def healthcare
-    @organizations = Organization.order(:organizationId)
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'HLTH' })
   end
 
   def education
-    @organizations = Organization.order(:organizationId)
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'EDU' })
   end
 
   def childcare
-    @organizations = Organization.order(:organizationId)
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'CHLD' })
   end
 
   def legal_resources
-    @organizations = Organization.order(:organizationId)
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'LEGL' })
   end
 end
