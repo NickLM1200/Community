@@ -31,6 +31,11 @@
             -webkit-text-stroke: 2px #FFD700; /* Outline becomes gold on hover */
         }
 
+        .favorite-star.favorited {
+            color: #FFD700; /* Gold color when favorited */
+            -webkit-text-stroke: 2px #FFD700; /* Gold outline */
+        }
+
         /* Style for the "Rate this organization" link */
         .rate-link {
             color: white;
@@ -141,7 +146,8 @@
                     <div class="favorite">
                         <%= form_with model: Favorite.new, url: favorites_path, method: :post, local: false do |f| %>
                             <%= f.hidden_field :organizationID_id, value: organization.organizationId %>
-                            <%= f.submit "★", class: "favorite-star", title: "Add to Favorites", data: { confirm: 'Are you sure you want to add this organization to your favorites?' } %>
+                            <%= f.submit "★", class: "favorite-star #{'favorited' if current_user.favorites.exists?(organizationID_id: organization.id)}", title: "Add to Favorites", data: { confirm: 'Are you sure you want to add this organization to your favorites?' } %>
+
                         <% end %>
                     </div>
                 </div>

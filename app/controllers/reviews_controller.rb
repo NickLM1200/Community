@@ -6,6 +6,7 @@ class ReviewsController < ApplicationController
   def index
     @organization = Organization.find(params[:organization_id])
     @reviews = @organization.reviews.where(reviewStatus: true) # Show only approved reviews
+    
   end
 
   # GET /reviews/1 or /reviews/1.json
@@ -58,11 +59,15 @@ class ReviewsController < ApplicationController
 
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
-    @review.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to reviews_path, status: :see_other, notice: "Review was successfully destroyed." }
-      format.json { head :no_content }
+    if @review.userID_id == current_user.username || current_user.admin?
+      @review.destroy
+  
+      respond_to do |format|
+        format.html { redirect_to organization_reviews_path(@organization, review), status: :see_other, notice: "Review was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to organization_reviews_path(@review.organization), alert: "You are not authorized to delete this review."
     end
   end
 

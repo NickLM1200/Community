@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function() {
             // Disable the button to prevent further clicks
             button.disabled = true;
 
+            // Toggle the star color immediately when clicked
+            button.classList.toggle('favorited');  // This will turn the star gold
+
             const form = button.closest('form');
             const formData = new FormData(form);
 
@@ -44,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => {
                 // Handle errors and show error message
                 showFlashMessage("Unable to add to favorites.", 'error');
+                // Optionally, revert the color change if there is an error
+                button.classList.remove('favorited');
             })
             .finally(() => {
                 // Re-enable the button after the request completes

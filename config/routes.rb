@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :favorites
 
   resources :organizations do
-    resources :reviews, only: [:index, :new, :create]  # Allow adding and viewing reviews for organizations
+    resources :reviews, only: [:index, :new, :create, :destroy]  # Allow adding and viewing reviews for organizations
     member do
       get 'explore', to: 'pages#explore', as: 'explore'
     end

@@ -76,6 +76,11 @@
             margin-left: auto; /* Push the star button to the right side */
         }
 
+        .favorite-star.favorited {
+            color: #FFD700; /* Change color to gold on hover */
+            -webkit-text-stroke: 2px #FFD700; /* Outline becomes gold on hover */
+        }
+
         /* Responsive layout: Stack cards on small screens */
         @media screen and (max-width: 768px) {
             .card-grid {
@@ -107,7 +112,9 @@
                             <div class="favorite">
                                 <%= form_with model: Favorite.new, url: favorites_path, method: :post, local: false do |f| %>
                                     <%= f.hidden_field :organizationID_id, value: favorite.organization.organizationId %>
-                                    <%= f.submit "★", class: "favorite-star", title: "Add to Favorites" %>
+                                    <%= f.submit "★", class: "favorite-star #{'favorited' if current_user.favorites.exists?(organizationID_id: favorite.organization.id)}", title: "Add to Favorites" %>
+
+
                                 <% end %>
                             </div>
                         </div>
