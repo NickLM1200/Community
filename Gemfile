@@ -42,6 +42,7 @@ gem "jbuilder"
 # Authentication and authorization
 gem 'devise'  # Handles authentication with ready-to-use strategies and views.
 gem 'pundit'  # Provides a set of helpers to enforce permission policies.
+gem "dotenv"  # Loads environment variables from .env into ENV.
 
 
 

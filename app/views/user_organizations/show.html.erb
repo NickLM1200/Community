@@ -1,0 +1,31 @@
+<h1><%= @organization.org_name %></h1>
+
+<div>
+  <strong>Service Summary:</strong>
+  <p>
+    <%= @organization.servicesSummary %>
+  </p>
+</div>
+
+<p>
+  <strong>Street:</strong>
+  <%= sanitize(@organization.street) %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @organization.city %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @organization.zipcode %>
+</p>
+
+<div>
+  <% if request.referer.present? %>
+    <%= link_to "Back to Results", request.referer, class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to "Back to Organizations", user_organizations_path, class: "btn btn-primary" %>
+  <% end %>
+</div>

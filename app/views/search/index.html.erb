@@ -1,0 +1,21 @@
+<h1>Search Results</h1>
+
+<% if @organization_results.any? || @event_results.any? %>
+  <ul>
+    <% @organization_results.each do |organization| %>
+      <li>
+        <h3><%= link_to organization.org_name, user_organization_path(organization) %></h3>
+        <p><%= truncate(organization.servicesSummary, length: 150) %></p>
+      </li>
+    <% end %>
+    <% @event_results.each do |event| %>
+      <li>
+        <h3><%= link_to event.title, event_path(event) %></h3>
+        <p><%= truncate(event.eventDescription, length: 150) %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No results found for "<%= h(@query) %>"</p>
+<% end %>
+
