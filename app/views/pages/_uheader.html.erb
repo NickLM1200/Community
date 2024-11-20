@@ -44,7 +44,6 @@
             </a>
             <ul class="dropdown-menu custom-dropdown-bg" aria-labelledby="accountDropdown">
               <li><%= link_to 'Profile', user_path(current_user.username), class: 'dropdown-item' %></li>
-              <li><%= link_to 'Dependents', dependents_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Favorites', favorites_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Surveys', surveys_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Settings', edit_user_path(current_user.username), class: 'dropdown-item' %></li>

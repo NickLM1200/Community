@@ -19,7 +19,7 @@ module Administrator
 
         def create
             @answer = Answer.new(answer_params)
-            @answer.admin_username = Current.admin.username
+            @answer.admin_username_id = Current.admin.username
 
             respond_to do |format|
                 if @answer.save

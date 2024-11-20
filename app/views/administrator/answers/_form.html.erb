@@ -1,6 +1,6 @@
 <div>
     <%= form_with(model: [:administrator, answer]) do |form| %>
-        <% if answer.erros.any? %>
+        <% if answer.errors.any? %>
             <div class="alert alert-danger">
                 <ul>
                     <% answer.errors.each do |error| %>
