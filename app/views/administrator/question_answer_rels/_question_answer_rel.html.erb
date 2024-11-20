@@ -1,0 +1,9 @@
+<tr>
+    <td><strong><%= link_to question_answer_rel.qaID, edit_administrator_question_answer_rel_path(question_answer_rel.qaID), class: "link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %></strong></td>
+    <td><%= question_answer_rel.question.question %></td>
+    <td><%= question_answer_rel.answer.answer %></td>
+    <td><%= question_answer_rel.admin_username %></td>
+    <td><%= question_answer_rel.created_at %></td>
+    <td><%= question_answer_rel.updated_at %></td>
+    <td><%= button_to "Delete", administrator_question_answer_rel_path(question_answer_rel), method: :delete, class: 'btn btn-outline-success', onclick: "return confirm('Are you sure you want to delete this Relation?');" %></td>
+</tr>
