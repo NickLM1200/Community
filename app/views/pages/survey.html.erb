@@ -43,10 +43,11 @@
     Each answer belongs to a question via questionanswerrel.
     Please seed or add for additional questions and answers.
     ** Would like to alter this so this appears AFTER conditional above. -->
+    <% if @questions.present? %>
     <% @questions.each do |question| %>
       <div class="question">
         <h2><%= question.question %></h2> <!-- Display the question text -->
-
+  
         <% question.answers.each do |answer| %>
           <div>
             <%= radio_button_tag "responses[#{question.id}]", answer.id %>
@@ -55,6 +56,9 @@
         <% end %>
       </div>
     <% end %>
+  <% else %>
+    <p>Please seed or add additional questions and answers.</p>
+  <% end %>
 
     <%= submit_tag "Submit Survey" %>
   </form>

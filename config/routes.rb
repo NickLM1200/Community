@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'safety_check/show'
   get 'pages/about_us'
-  get 'pages/survey'
+  get 'pages/:mypage', to: 'pages#show', as: 'page'
 
   namespace :administrator do
     resources :classifications

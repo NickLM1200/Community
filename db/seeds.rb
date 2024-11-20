@@ -949,13 +949,6 @@ end
  
 puts "Seed data created successfully!"
 
-puts "Clearing questions & answers..."
-
-# Clear existing data
-QuestionAnswerRel.delete_all
-Answer.delete_all
-Question.delete_all
-
 puts "Seeding Questions..."
 question1 = Question.create!(question: "What is your age range?")
 

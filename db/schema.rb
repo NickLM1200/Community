@@ -66,7 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_203849) do
     t.boolean "isVirtual", null: false
     t.string "meetingLink", limit: 2050
     t.boolean "eventstatus", null: false
-    t.string "organization_id"
+    t.integer "organization_id"
     t.string "user_id"
     t.string "admin_id"
     t.datetime "created_at", null: false
@@ -78,19 +78,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_203849) do
 
   create_table "favorites", primary_key: "favoriteID", force: :cascade do |t|
     t.string "userID_id"
-    t.string "organizationID_id"
+    t.integer "organizationID_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organizationID_id"], name: "index_favorites_on_organizationID_id"
     t.index ["userID_id"], name: "index_favorites_on_userID_id"
   end
 
-  create_table "organizations", primary_key: "email", id: { type: :string, limit: 255 }, force: :cascade do |t|
+  create_table "organizations", primary_key: "organizationId", force: :cascade do |t|
     t.string "org_name", limit: 255, null: false
     t.string "street", limit: 255, null: false
     t.string "city", limit: 100, null: false
     t.string "org_state", limit: 2, default: "CO", null: false
     t.integer "zipcode", null: false
+    t.string "email", limit: 255, null: false
     t.string "phoneNumber", limit: 15
     t.string "webLink", limit: 2050
     t.text "servicesSummary", null: false
@@ -128,7 +129,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_203849) do
   end
 
   create_table "reviews", primary_key: "reviewID", force: :cascade do |t|
-    t.string "organizationID_id"
+    t.integer "organizationID_id"
     t.string "userID_id"
     t.string "title", limit: 150
     t.text "comment"
@@ -154,22 +155,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_203849) do
 
   create_table "users", primary_key: "username", id: { type: :string, limit: 15 }, force: :cascade do |t|
     t.string "email", limit: 255, null: false
-    t.string "firstName", limit: 150, null: false
-    t.string "ageRange", limit: 8, null: false
-    t.string "hashedPasswd", limit: 80, null: false
-    t.integer "zipCode"
+    t.string "first_name", limit: 150, null: false
+    t.string "age_range", limit: 8, null: false
+    t.string "password_digest", limit: 80, null: false
+    t.integer "zipcode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "classifications", "categories", column: "categoryabbr_id", primary_key: "abbv"
-  add_foreign_key "classifications", "organizations", column: "organizationID_id", primary_key: "email"
+  add_foreign_key "classifications", "organizations", column: "organizationID_id", primary_key: "organizationId"
   add_foreign_key "dependents", "users", column: "userID_id", primary_key: "username"
-  add_foreign_key "events", "admins", primary_key: "username"
-  add_foreign_key "events", "organizations", primary_key: "email"
+  add_foreign_key "events", "admins", primary_key: "username", on_delete: :nullify
+  add_foreign_key "events", "organizations", primary_key: "organizationId"
   add_foreign_key "events", "users", primary_key: "username"
-  add_foreign_key "favorites", "organizations", column: "organizationID_id", primary_key: "email"
+  add_foreign_key "favorites", "organizations", column: "organizationID_id", primary_key: "organizationId"
   add_foreign_key "favorites", "users", column: "userID_id", primary_key: "username"
   add_foreign_key "password_resets", "users", primary_key: "username"
   add_foreign_key "question_answer_rels", "answers", column: "answerID", primary_key: "answerID"

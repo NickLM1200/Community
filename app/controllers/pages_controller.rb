@@ -33,6 +33,22 @@ class PagesController < ApplicationController
     session[:explore_category] = 'legal_resources'
     @organizations = Organization.joins(:categories).where(categories: { abbv: 'LEGL' })
   end
+
+  def show
+    # Capture the dynamic page name from the URL
+    @page_name = params[:mypage]
+
+    # Special behavior for "survey"
+    if @page_name == "survey"
+      @questions = Question.all
+      render template: "pages/survey"
+    else
+      # Default behavior: render a dynamic view or raise an error for missing templates
+      render template: "pages/#{@page_name}"
+    end
+  rescue ActionView::MissingTemplate
+    render plain: "Page not found", status: :not_found
+  end
   
   def survey
     survey = Survey.new
