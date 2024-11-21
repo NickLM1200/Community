@@ -12,6 +12,7 @@ class Review < ApplicationRecord
     validates :starValue, presence: true, inclusion: { in: 1..5, message: "must be between 1 and 5" }
     validates :organizationID_id, presence: true
 
+    self.primary_key = 'reviewID'
 
     private
     

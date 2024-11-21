@@ -33,4 +33,10 @@ class PagesController < ApplicationController
     session[:explore_category] = 'legal_resources'
     @organizations = Organization.joins(:categories).where(categories: { abbv: 'LEGL' })
   end
+
+    def terms_of_service
+    end
+  
+    def privacy_policy
+    end
 end
