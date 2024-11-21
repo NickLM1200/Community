@@ -1,7 +1,7 @@
 <tr>
     <td><strong><%= link_to answer.answerID, edit_administrator_answer_path(answer.answerID), class: "link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %></strong></td>
     <td><%= answer.answer %></td>
-    <td><%= answer.admin_username_id %></td>
+    <td><%= answer.admin_username %></td>
     <td><%= answer.created_at %></td>
     <td><%= answer.updated_at %></td>
     <td><%= button_to "Delete", administrator_answer_path(answer), method: :delete, class: 'btn btn-outline-success', onclick: "return confirm('Are you sure you want to delete this answer?');" %></td>
