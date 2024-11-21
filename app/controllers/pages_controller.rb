@@ -34,9 +34,11 @@ class PagesController < ApplicationController
     @organizations = Organization.joins(:categories).where(categories: { abbv: 'LEGL' })
   end
 
-    def terms_of_service
-    end
+  def terms_of_service
+
+  end
   
-    def privacy_policy
-    end
+  def privacy_policy
+    
+  end
 end
