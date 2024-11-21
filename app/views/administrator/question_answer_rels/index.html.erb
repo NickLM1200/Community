@@ -1,0 +1,23 @@
+<h1 class = "text-center">Question-Answer Relations</h1>
+<%= button_to "Create new relation", new_administrator_question_answer_rel_path, method: :get, class: "btn btn-alogin btn-lg" %>
+<p></p>
+<div id="quesansrel">
+  <table class = "table">
+    <thead>
+      <tr>
+        <th scope = "col"><strong>ID:</strong></th>
+        <th scope = "col"><strong>Question:</strong></th>
+        <th scope = "col"><strong>Answer:</strong></th>
+        <th scope = "col"><strong>Admin:</strong></th>
+        <th scope = "col"><strong>Created:</strong></th>
+        <th scope = "col"><strong>Last Update:</strong></th>    
+      </tr>
+    </thead>
+    <tbody class = "table-group-divider">
+      <% @question_answer_rels.each do |question_answer_rel| %>
+        <%= render partial: "question_answer_rel", locals: { question_answer_rel: question_answer_rel } %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

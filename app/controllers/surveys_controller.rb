@@ -1,6 +1,17 @@
 class SurveysController < ApplicationController
   before_action :set_survey, only: %i[ show edit update destroy ]
 
+  def survey
+    survey = Survey.create # Create the survey record
+  
+    if survey.persisted?
+      @survey_service = SurveyService.new(survey.id) # Pass the survey ID to the service
+    else
+      flash[:error] = "Survey could not be created."
+      redirect_to some_path and return
+  end
+  
+
   # GET /surveys or /surveys.json
   def index
     @surveys = Survey.all
@@ -21,18 +32,20 @@ class SurveysController < ApplicationController
 
   # POST /surveys or /surveys.json
   def create
-    @survey = Survey.new(survey_params)
-
-    respond_to do |format|
-      if @survey.save
-        format.html { redirect_to @survey, notice: "Survey was successfully created." }
-        format.json { render :show, status: :created, location: @survey }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @survey.errors, status: :unprocessable_entity }
-      end
+    params[:responses].each do |question_id, answer_id|
+      SurveyResponse.create(question_id: question_id, answer_id: answer_id)
+    end
+    redirect_to success_path, notice: 'Survey submitted successfully!'
+  end
+end
+  
+    private
+  
+    def survey_params
+      params.permit(:userID_id, :questionID_id, :answer)
     end
   end
+  
 
   # PATCH/PUT /surveys/1 or /surveys/1.json
   def update
@@ -61,17 +74,16 @@ class SurveysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_survey
       @survey = Survey.find(params[:id])
+      unless @survey
+        redirect_to surveys_path, alert: "Survey not found."
+      end
     end
 
     # Only allow a list of trusted parameters through.
-    def survey_params
-      params.fetch(:survey, {})
-    end
-
     private
 
     def survey_params
-      params.permit(:userID_id, :questionID_id, :answer, :dependents, :age)
-
+      params.require(:survey).permit(:name)
     end
+        
 end

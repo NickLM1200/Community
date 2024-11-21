@@ -8,7 +8,9 @@ module ApplicationHelper
     controller_name == 'questions' ||
     controller_name == 'reviews' ||
     controller_name == 'surveys' ||
-    controller_name == 'users'
+    controller_name == 'users' ||
+    controller_name == 'answers' ||
+    controller_name == 'question_answer_rels'
 
     controller_path.include?('administrator/')
   end

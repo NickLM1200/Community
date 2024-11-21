@@ -948,3 +948,18 @@ puts "Seeding Surveys..."
 end
  
 puts "Seed data created successfully!"
+
+puts "Seeding Questions..."
+question1 = Question.create!(question: "What is your age range?")
+
+puts "Seeding Answers..."
+answer1 = Answer.create!(answer: "Under 18")
+answer2 = Answer.create!(answer: "19-64")
+answer3 = Answer.create!(answer: "65+")
+
+puts "Associating Questions and Answers..."
+QuestionAnswerRel.create!(question: question1, answer: answer1)
+QuestionAnswerRel.create!(question: question1, answer: answer2)
+QuestionAnswerRel.create!(question: question1, answer: answer3)
+
+puts "Seeding complete!"

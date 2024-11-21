@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get 'safety_check/show'
   get 'pages/about_us'
-  get 'pages/survey'
+  get 'pages/:mypage', to: 'pages#show', as: 'page'
 
 
 
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
     resources :reviews
     resources :surveys
     resources :users
+    resources :answers
+    resources :question_answer_rels
   end
 
 
@@ -27,6 +30,7 @@ Rails.application.routes.draw do
   end
 
   resources :surveys, only: [:create]
+  resources :survey_responses, only: :create
   resources :dependents
   resources :questions
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
@@ -71,6 +75,9 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new", as: :login   # Use the index action for displaying login form
   post "login", to: "sessions#create"  # Use the new login action for logging in
   delete "logout", to: "sessions#destroy", as: :logout # Use the destroy action for user logout
+
+  # Safety check on survey
+  get '/safety-check', to: 'safety_check#index', as: 'safety_check'
 
   get 'forgot_password', to: 'password_resets#new', as: :forgot_password
   

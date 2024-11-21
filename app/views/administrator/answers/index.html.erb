@@ -1,0 +1,21 @@
+<h1 class = "text-center">Answers</h1>
+<%= button_to "Add new Answer", new_administrator_answer_path, method: :get, class: 'btn btn-alogin btn-lg' %>
+<p></p>
+<div id = "answers">
+    <table class = "table">
+        <thead>
+            <tr>
+                <th scope = "col"><strong>ID:</strong></th>
+                <th scope = "col"><strong>Answer:</strong></th>
+                <th scope = "col"><strong>Creation Admin:</strong></th>
+                <th scope = "col"><strong>Created:</strong></th>
+                <th scope = "col"><strong>Last Updated:</strong></th>
+            </tr>
+        </thead>
+        <tbody class = "table-group-divider">
+            <% @answers.each do |answer| %>
+                <%= render partial: "answer", locals: { answer: answer} %>
+            <% end %>
+        </tbody>
+    </table>
+</div>

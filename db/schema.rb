@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_17_203849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
+  end
+
+  create_table "answers", primary_key: "answerID", force: :cascade do |t|
+    t.string "answer", limit: 150, null: false
+    t.string "admin_username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", primary_key: "abbv", id: { type: :string, limit: 5 }, force: :cascade do |t|
@@ -103,15 +110,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
     t.index ["user_id"], name: "index_password_resets_on_user_id"
   end
 
-  create_table "question_answer_rels", force: :cascade do |t|
-    t.text "body"
+  create_table "question_answer_rels", primary_key: "qaID", force: :cascade do |t|
+    t.string "admin_username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "questionID", null: false
+    t.integer "answerID", null: false
   end
 
   create_table "questions", primary_key: "questionID", force: :cascade do |t|
     t.string "question", limit: 150, null: false
-    t.string "admin_username", null: false
+    t.string "admin_username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -161,6 +170,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
   add_foreign_key "favorites", "organizations", column: "organizationID_id", primary_key: "organizationId"
   add_foreign_key "favorites", "users", column: "userID_id", primary_key: "username"
   add_foreign_key "password_resets", "users", primary_key: "username"
+  add_foreign_key "question_answer_rels", "answers", column: "answerID", primary_key: "answerID"
+  add_foreign_key "question_answer_rels", "questions", column: "questionID", primary_key: "questionID"
   add_foreign_key "reviews", "admins", column: "adminID_id", primary_key: "username", on_delete: :nullify
   add_foreign_key "reviews", "organizations", column: "organizationID_id", primary_key: "organizationId"
   add_foreign_key "reviews", "users", column: "userID_id", primary_key: "username"

@@ -41,4 +41,33 @@ class PagesController < ApplicationController
   def privacy_policy
     
   end
-end
+
+  def show
+    # Capture the dynamic page name from the URL
+    @page_name = params[:mypage]
+
+    # Special behavior for "survey"
+    if @page_name == "survey"
+      @questions = Question.all
+      render template: "pages/survey"
+    else
+      # Default behavior: render a dynamic view or raise an error for missing templates
+      render template: "pages/#{@page_name}"
+    end
+  rescue ActionView::MissingTemplate
+    render plain: "Page not found", status: :not_found
+  end
+  
+  def survey
+    survey = Survey.new
+  
+    if survey.save
+      @survey_service = SurveyService.new(survey.id)
+      # Preload data needed for the survey view
+      @questions = Question.includes(:answers)
+    else
+      flash[:error] = "Survey could not be created: #{survey.errors.full_messages.join(", ")}"
+      redirect_to root_path # Use a valid path here
+    end
+  end
+end  

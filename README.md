@@ -18,6 +18,8 @@ Our vision is to build a stronger, more connected community by ensuring that eve
 - Search for resources based on location and needs
 - User feedback and ratings for services
 - Mobile-friendly design for ease of access
+- Recommendations for end-users for additional services 
+- Accessibility for larger fonts
 
 # Project Setup Instructions
 
@@ -160,11 +162,14 @@ Before you begin, ensure you have the following installed on your machine:
 ---
 
 # In Progress
-- **Database Creation:** In Progress
-- **Database Initialization:** In Progress
-- **How to Run the Test Suite:** In Progress
-- **Services (job queues, cache servers, search engines, etc.):** In Progress
-- **Deployment Instructions:** In Progress
+- **Current Bugs** - Github will be kept up-to-date regarding any bugs the team has encountered.
+- **New Bugs** - Users who download the program are strongly encouraged to submit bugs to the team.
+
+## Future Releases
+We at COmmunity are interested in expanding to add more features for end users. These include:
+- Additional support for accessibility (dark mode, text-to-speech)
+- Recommendation system
+- Calendar function for events 
 
 ## Contributors
 
@@ -174,3 +179,5 @@ Before you begin, ensure you have the following installed on your machine:
 - akrajeski - Anna Krajeski
 - NatashaLeeXY - Natasha Lee
 - Ariamestra - Maria Estrada
+
+Interested in joing our project? Join our organization [https://github.com/Colorado-Community-Resources] to make changes.

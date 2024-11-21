@@ -21,6 +21,12 @@
         <div class = "card-item">
             <p class="text-content">There are <%= Question.count %> questions</p>
         </div>
+        <div class = "card-item">
+            <p class="text-content">There are <%= Answer.count %> answers</p>
+        </div>
+        <div class = "card-item">
+            <p class="text-content">There are <%= QuestionAnswerRel.count %> questions and answers relations</p>
+        </div>
          <div class = "card-item">
             <p class="text-content"><%= Event.count %> total events</p>
             <p class="text-content"><%= Event.where(eventstatus: false).count %> events that need to be reviewed</p>

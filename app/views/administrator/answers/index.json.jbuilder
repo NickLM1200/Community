@@ -1,0 +1,1 @@
+json.array! @answers, partial: "administrator/answers/answer", as: :answer
