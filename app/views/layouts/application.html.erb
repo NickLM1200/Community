@@ -59,6 +59,9 @@
       <%= yield %>
     </div>
 
+    <!-- Include Footer Partial -->
+    <%= render 'pages/footer' %> <!-- This will render your footer -->
+
     <!--Custom Javascript for events accordion -->
     <%= javascript_include_tag 'events', 'data-turbo-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>

@@ -34,6 +34,14 @@ class PagesController < ApplicationController
     @organizations = Organization.joins(:categories).where(categories: { abbv: 'LEGL' })
   end
 
+  def terms_of_service
+
+  end
+  
+  def privacy_policy
+    
+  end
+
   def show
     # Capture the dynamic page name from the URL
     @page_name = params[:mypage]

@@ -58,3 +58,42 @@
     color: inherit !important;
     background-color: transparent !important;
   }
+
+  /* Flexbox Layout for Body */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the body takes at least full screen height */
+}
+
+.content {
+  flex-grow: 1; /* This allows the content to take up the remaining space */
+  margin-bottom: 120px; /* Space between page content and footer */
+
+}
+
+/* Footer styling */
+.footer {
+  background-color: #4e6a5b; /* Footer background */
+  color: #404040;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 120px; /* Pushes footer to the bottom */
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.footer-link {
+  text-decoration: none; /* Remove underline */
+  color: #404040; /* Dark grey for the links */
+  margin: 0 5px; /* Add space around links */
+}
+
+.footer-separator {
+  margin: 0 10px; /* Add extra space around the bullet */
+}
+
+
+  

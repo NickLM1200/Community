@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'pages/about_us'
   get 'pages/:mypage', to: 'pages#show', as: 'page'
 
+
+
   namespace :administrator do
     resources :classifications
     resources :categories
@@ -47,6 +49,9 @@ Rails.application.routes.draw do
   get 'legal_resources', to: 'pages#legal_resources', as: 'legal_resources'
 
   get 'pages/explore'
+  
+  get 'terms_of_service', to: 'pages#terms_of_service'
+  get 'privacy_policy', to: 'pages#privacy_policy'
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

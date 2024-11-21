@@ -87,6 +87,23 @@
                 grid-template-columns: 1fr; /* Stack the cards on small screens */
             }
         }
+
+        .btn-delete {
+            background-color: #D5D5D4; 
+            color: black;
+            padding: 6px 15px;
+            text-align: center;
+            border-radius: 25px; /* Rounded corners */
+            border: none; 
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+          .btn-delete:hover {
+            background-color: #ddd;  /* Darker black background on hover */
+        }
+
     </style>
 </head>
 <body>
@@ -127,9 +144,9 @@
                             <button class="web-button"><a href="<%= favorite.organization.webLink %>">Website</a></button> <!-- Website -->
                         </div>
 
-                        <div class="actions">
+                        <div class="actions"> 
                             <!-- Button to destroy (delete) the favorite -->
-                            <%= button_to "Destroy this favorite", favorite, method: :delete, data: { confirm: 'Are you sure?' } %>
+                            <%= button_to "Delete", favorite, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-delete' %>
                             
                         </div>
                     </div>

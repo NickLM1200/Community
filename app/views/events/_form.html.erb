@@ -1,8 +1,7 @@
 <%= form_with(model: event) do |form| %>
   <% if event.errors.any? %>
-    <div style="color: red">
+    <div class="error-message">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
       <ul>
         <% event.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,50 +10,120 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="form-group">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :eventDescription, "Event Description", style: "display: block" %>
-    <%= form.text_area :eventDescription %>
+  <div class="form-group">
+    <%= form.label :eventDescription, "Event Description", class: "form-label" %>
+    <%= form.text_area :eventDescription, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :eventDate, "Date & Time", style: "display: block" %>
-    <%= form.datetime_field :eventDate %>
+  <div class="form-group">
+    <%= form.label :eventDate, "Date & Time", class: "form-label" %>
+    <%= form.datetime_field :eventDate, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :isVirtual, "Is this a virtual event?", style: "display: block" %>
-    <%= form.radio_button :isVirtual, true, id: "is_virtual_yes" %>
-    <%= form.label :isVirtual, "Yes", for: "is_virtual_yes" %>
-  
-    <%= form.radio_button :isVirtual, false, id: "is_virtual_no" %>
-    <%= form.label :isVirtual, "No", for: "is_virtual_no" %>
+  <div class="form-group">
+    <%= form.label :isVirtual, "Is this a virtual event?", class: "form-label" %>
+    <%= form.radio_button :isVirtual, true, id: "is_virtual_yes", class: "form-check-input" %>
+    <%= form.label :isVirtual, "Yes", for: "is_virtual_yes", class: "form-check-label" %>
+
+    <%= form.radio_button :isVirtual, false, id: "is_virtual_no", class: "form-check-input" %>
+    <%= form.label :isVirtual, "No", for: "is_virtual_no", class: "form-check-label" %>
   </div>
 
-  <div id="virtual_event_url" style="display: none;">
-    <%= form.label :meetingLink, "Meeting Link", style: "display: block" %>
+  <div id="virtual_event_url" style="display: none;" class="form-group">
+    <%= form.label :meetingLink, "Meeting Link", class: "form-label" %>
     <%= form.text_field :meetingLink, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :street, "Street address", style: "display: block" %>
+  <div class="form-group">
+    <%= form.label :street, "Street address", class: "form-label" %>
     <%= form.text_field :street, id: "street_field", class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :city, style: "display: block" %>
+  <div class="form-group">
+    <%= form.label :city, class: "form-label" %>
     <%= form.text_field :city, id: "city_field", class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :zipcode, "ZIP Code", style: "display: block" %>
+  <div class="form-group">
+    <%= form.label :zipcode, "ZIP Code", class: "form-label" %>
     <%= form.text_field :zipcode, id: "zipcode_field", class: "form-control" %>
-
-  <div>
-    <%= form.submit %>
   </div>
+
+  <div class="form-group">
+    <%= form.submit "Submit", class: "btn btn-submit" %>
+  </div>
+
 <% end %>
+
+<style>
+  /* General form styling */
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: bold;
+    color: #4e6a5b;  /* Dark green color for labels */
+    margin-bottom: 5px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #6B9080;  /* Light green focus border */
+    box-shadow: 0 0 5px rgba(107, 144, 128, 0.5);
+  }
+
+  .form-check-input {
+    margin-right: 5px;
+  }
+
+  .form-check-label {
+    margin-right: 15px;
+    font-weight: normal;
+  }
+
+  .error-message {
+    color: red;
+    margin-bottom: 20px;
+  }
+
+  .error-message h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .error-message ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .btn-submit {
+    background-color: #6B9080;  /* Green color for the submit button */
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 20px;  /* Increased space below the header */
+
+  }
+
+  .btn-submit:hover {
+    background-color: #567d62;  /* Darker green on hover */
+    color: white;
+  }
+</style>
