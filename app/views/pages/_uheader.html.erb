@@ -44,7 +44,6 @@
             </a>
             <ul class="dropdown-menu custom-dropdown-bg" aria-labelledby="accountDropdown">
               <li><%= link_to 'Profile', user_path(current_user.username), class: 'dropdown-item' %></li>
-              <li><%= link_to 'Dependents', dependents_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Favorites', favorites_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Surveys', surveys_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Settings', edit_user_path(current_user.username), class: 'dropdown-item' %></li>
@@ -55,8 +54,47 @@
       <% end %>
         <%= form_with(url: search_path, method: :get, local: true, html: { class: 'd-flex ms-3', role: 'search' }) do |form| %>
           <%= form.text_field :query, placeholder: 'Search', class: 'form-control me-2', aria: { label: 'Search' }, required: true %>
-        <%= form.submit 'Search', class: 'btn btn-outline-success' %>
+        <%= form.submit 'Search', class: 'btn btn-outline-search' %>
       <% end %>
     </div>
   </div>
 </nav>
+
+
+
+
+<style>
+  /* Custom style for the dropdown menu with white border */
+  .dropdown-menu {
+    border: 2px solid white; /* White border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #ffffff; /* Ensure the background is white */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 10px; /* Add some padding */
+  }
+
+  /* Optional: Add hover effect for dropdown items */
+  .dropdown-item:hover {
+    background-color: #f0f0f0; /* Light gray hover background */
+    color: #6B9080; /* Match your color theme */
+  }
+
+  /* Increase font size for all text inside the navbar */
+  .navbar-nav .nav-link,
+  .navbar-brand,
+  .dropdown-item,
+  .form-control {
+  }
+
+  .btn-outline-search {
+    background-color: #A4C3B2;  /* Set the button background color */
+    color: #4e6a5b;
+    border: 1px solid #4e6a5b;  /* Border matching the background color */
+  }
+
+  .btn-outline-search:hover {
+    background-color: #4e6a5b;  /* Darker shade on hover */
+    border-color: #4e6a5b;  /* Darker border on hover */
+    color: white;
+  }
+</style>

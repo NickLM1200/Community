@@ -1,21 +1,73 @@
-<h1>Search Results</h1>
+<h1 class="search-results-title">
+  Search Results
+</h1>
+<p class="search-results-count">
+  <%= @organization_results.count + @event_results.count %> items found
+</p>
 
 <% if @organization_results.any? || @event_results.any? %>
-  <ul>
+  <div class="search-results">
     <% @organization_results.each do |organization| %>
-      <li>
-        <h3><%= link_to organization.org_name, user_organization_path(organization) %></h3>
+      <div class="search-card">
+        <h3><%= link_to organization.org_name, user_organization_path(organization), class: 'search-card-title' %></h3>
         <p><%= truncate(organization.servicesSummary, length: 150) %></p>
-      </li>
+      </div>
     <% end %>
     <% @event_results.each do |event| %>
-      <li>
-        <h3><%= link_to event.title, event_path(event) %></h3>
+      <div class="search-card">
+        <h3><%= link_to event.title, event_path(event), class: 'search-card-title' %></h3>
         <p><%= truncate(event.eventDescription, length: 150) %></p>
-      </li>
+      </div>
     <% end %>
-  </ul>
+  </div>
 <% else %>
   <p>No results found for "<%= h(@query) %>"</p>
 <% end %>
 
+<style>
+  .search-results {
+    display: block; /* Stack the cards vertically */
+    margin-top: 20px;
+  }
+
+  .search-card {
+    background-color: #FAF9F6;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 5px; /* Space between cards */
+  }
+
+  .search-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .search-card-title {
+    color: #4e6a5b;  /* Dark green color */
+    font-weight: bold;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+  }
+
+  .search-card-title:hover {
+    text-decoration: underline; /* Underline the title on hover */
+  }
+
+  .search-card p {
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* Styling for Search Results title */
+  .search-results-title {
+    color: black;  /* Dark Green color */
+    font-size: 36px;  /* Slightly larger text */
+  }
+
+  /* Styling for number of search results */
+  .search-results-count {
+    font-size: 17px;  /* Smaller text */
+    color: #888;  /* Gray color */
+    margin-bottom: 40px;
+  }
+</style>

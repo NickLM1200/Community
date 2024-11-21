@@ -1,3 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upcoming Events</title>
+    <style>
+        /* Override the btn-primary class */
+        .btn-primary {
+            background-color: #6B9080;  /* Button background color */
+            border-color: #6B9080;      /* Border color */
+        }
+
+        .btn-primary:hover {
+            background-color: #4e6a5b;  /* Darker shade when hovering */
+            border-color: #4e6a5b;
+
+        }
+
+        /* Override the btn-show-event class */
+        .btn-show-event {
+            background-color: #A4C3B2;  /* Button background color */
+            color: white;
+        }
+
+        .btn-show-event:hover {
+            background-color: #ddd;  /* Darker shade when hovering */
+        }
+
+
+        /* Add margin to the 'View Details' button for more space beneath */
+        .carousel-caption a.btn-primary {
+            margin-bottom: 20px; /* Adjust this value to add more space */
+        }
+
+        /* Custom styles for carousel */
+        .carousel-inner {
+            max-width: 100%;
+        }
+
+        .carousel-item {
+            padding: 20px;
+        }
+
+        .event-banner {
+            background-color: #A4C3B2; /* Background color for event banner */
+            height: 400px;
+            background-position: center;
+        }
+
+        .carousel-caption h5, .carousel-caption p {
+            text-align: center;
+            color: white;
+        }
+
+        .accordion-body {
+            font-size: 16px;
+        }
+
+        /* Add spacing between event details */
+        .event-details p {
+            margin-bottom: 15px; /* Adjust for more space */
+            line-height: 1.8; /* Increase spacing between lines of text */
+        }
+    
+        /* Optional: Add spacing above and below the separator */
+        .event-details hr {
+            margin: 25px 0; /* Adjust as needed */
+        }
+
+        
+
+    </style>
+</head>
+<body>
+
+
 <div id="eventsCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <% @upcoming_events.each_with_index do |event, index| %>
@@ -49,8 +124,10 @@
               </p>
             <% end %>
             <p>
-              <%= link_to "Show this event", event, class: "btn btn-link" %>
+              <%= link_to "Show this event", event, class: "btn btn-show-event" %>
             </p>
+            <hr style="border: none; border-top: 1px solid #b7b7b7; margin: 20px 0;"> <!-- Light gray separator -->
+
           <% end %>
         </div>
       </div>

@@ -1,31 +1,91 @@
-<h1><%= @organization.org_name %></h1>
+<h1 class="page-heading">Organization</h1>
 
-<div>
-  <strong>Service Summary:</strong>
-  <p>
-    <%= @organization.servicesSummary %>
-  </p>
+<div class="organization-card">
+  <h1 class="organization-title"><%= @organization.org_name %></h1>
+
+  <div class="organization-details">
+    <p>
+      <strong>Service Summary:</strong>
+      <br>
+      <%= @organization.servicesSummary %>
+    </p>
+
+    <p>
+      <strong>Street:</strong>
+      <%= sanitize(@organization.street) %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @organization.city %>
+    </p>
+
+    <p>
+      <strong>ZIP Code:</strong>
+      <%= @organization.zipcode %>
+    </p>
+  </div>
+
+  <div class="organization-actions">
+    <% if request.referer.present? %>
+      <%= link_to "Back to Results", request.referer, class: "btn btn-primary" %>
+    <% else %>
+      <%= link_to "Back to Organizations", user_organizations_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
 
-<p>
-  <strong>Street:</strong>
-  <%= sanitize(@organization.street) %>
-</p>
+<style>
+  /* Card styling */
+  .organization-card {
+    background-color: #FAF9F6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    max-width: 800px;
+  }
 
-<p>
-  <strong>City:</strong>
-  <%= @organization.city %>
-</p>
+  /* Title styling */
+  .organization-title {
+    color: #6B9080; /* Green color */
+    font-weight: bold;
+    font-size: 35px;
+    margin-bottom: 35px;
+  }
 
-<p>
-  <strong>Zipcode:</strong>
-  <%= @organization.zipcode %>
-</p>
+  /* Details spacing */
+  .organization-details p {
+    margin-bottom: 15px;
+    line-height: 1.8; /* Line spacing for readability */
+  }
 
-<div>
-  <% if request.referer.present? %>
-    <%= link_to "Back to Results", request.referer, class: "btn btn-primary" %>
-  <% else %>
-    <%= link_to "Back to Organizations", user_organizations_path, class: "btn btn-primary" %>
-  <% end %>
-</div>
+  /* Action buttons */
+  .organization-actions {
+    margin-top: 20px; /* Add spacing above the buttons */
+  }
+
+  /* Button styles */
+  .btn-primary {
+    background-color: #6B9080; /* Green button color */
+    border-color: #6B9080;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #4e6a5b; /* Darker shade on hover */
+    border-color: #4e6a5b;
+    text-decoration: none;
+  }
+
+  /* Page heading */
+  .page-heading {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px; /* Space below the heading */
+  }
+</style>

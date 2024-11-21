@@ -11,7 +11,7 @@
       border: 3px solid transparent; 
       padding: 16px; 
       background-color: #A4C3B2; 
-      max-width: 600px; 
+      max-width: 800px !important; 
       width: 100%; 
       margin: 0 auto; 
     }
@@ -95,7 +95,7 @@
   </div>
   <div class="form-group">
     <%= form.label :message, class: "font-weight-bold" %>
-    <%= form.text_area :message, class: "form-control rounded-3" %>
+    <%= form.text_area :message, rows: 6, class: "form-control rounded-3" %>
   </div>
   <%= form.submit "Submit", class: "submit-btn" %>
 <% end %>

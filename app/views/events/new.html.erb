@@ -1,9 +1,32 @@
-<h1>New event</h1>
+<h1 class="page-header">New Event</h1>
 
 <%= render "form", event: @event %>
 
-<br>
-
-<div>
-  <%= link_to "Back to events", events_path %>
+<div class="mt-4">
+  <%= link_to "Back to events", events_path, class: "btn btn-back" %>
 </div>
+
+<style>
+  /* Header Styling */
+  .page-header {
+    font-size: 2rem;
+    margin-bottom: 40px;  /* Increased space below the header */
+  }
+
+  /* Button Styling */
+  .btn-back {
+    background-color: #6B9080;  /* Green background */
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 15px;
+    text-decoration: none; /* Remove underline */
+    display: inline-block;
+  }
+
+  .btn-back:hover {
+    background-color: #ddd;  /* Darker green on hover */
+    color: black;
+    text-decoration: none;
+  }
+</style>

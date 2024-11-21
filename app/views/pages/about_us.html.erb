@@ -1,57 +1,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>About Us</title>
+    <title>About Us</title>
+    <style>
+        /* Header styling */
+        h1 {
+            display: inline-block; /* Makes the underline span only the text */
+            border-bottom: 2px solid lightgrey; /* Thin line under the headers */
+            padding-bottom: 5px; /* Optional: Adds space between text and the underline */
+            margin-bottom: 20px; /* Adjust the spacing between the header and the text below */
+            color: #6B9080; /* Header text color */
+            text-align: center; /* Center align the header */
+            font-weight: bold; /* Make the header bold */
+
+        }
+
+        /* Light grey background for the "About Us" section only */
+        .about-us-section {
+            background-color: #A4C3B2; /* Light grey background for the section */
+            padding: 70px 40px; /* Padding around the content */
+            margin: 20px auto; /* Centers the section */
+            max-width: 1300px; /* Limit the width */
+            text-align: center; /* Center align the header */
+
+        }
+
+        .about-us-section h1 {
+            color: white; 
+        }
+
+        .about-us-section .text-content {
+            color: white; 
+            font-size: 20px; /* Increase the font size for readability */
+
+        }
+
+        /* Body padding for better spacing */
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif; /* Clean font */
+            margin: 0; /* Remove default body margin */
+            background-color: #f4f4f4; /* Optional: Lighter background for the body */
+        }
+
+        /* Text content styling */
+        .text-content {
+            font-size: 1.1em; /* Slightly larger text for readability */
+            line-height: 1.6; /* Increase line spacing for better readability */
+            margin-bottom: 20px; /* Space between paragraphs */
+
+        }
+
+        /* Section for the other content without background */
+        .normal-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 10px auto;
+
+        }
+    </style>
 </head>
-<style>
-.text-box {
-    border: 2px solid black; /* Adjust the thickness and color of the border */
-    padding: 10px;           /* Add some space inside the box */
-    display: inline-block;    /* Ensure the box wraps just around the text */
-    background-color: lightyellow;
-}
-</style>
 <body>
 
-<h1>About Us</h1>
-<p class="text-content">
-At Colorado Community Resource Finder, we are committed to empowering Colorado's low-income residents, 
-people experiencing homelessness, immigrants and migrants by providing a centralized, user-friendly platform 
-to discover free or low-cost resources in essential areas such as food, housing, healthcare, childcare, legal services, and education.</p>
+  <!-- About Us Section with light grey background -->
+  <div class="about-us-section">
+    <h1>About Us</h1>
+    <p class="text-content">
+        At Colorado Community Resource Finder, we are committed to empowering Colorado's low-income residents, 
+        people experiencing homelessness, immigrants and migrants by providing a centralized, user-friendly platform 
+        to discover free or low-cost resources in essential areas such as food, housing, healthcare, childcare, legal services, and education.
+    </p>
 
-<p class="text-content">
-Our vision is to build a stronger, more connected community by ensuring that everyone in Colorado has access to the 
-resources they need to thrive. By centralizing knowledge and creating a space for feedback and collaboration, 
-we aim to make navigating these services easier and more transparent for all.</p>
+    <p class="text-content">
+        Our vision is to build a stronger, more connected community by ensuring that everyone in Colorado has access to the 
+        resources they need to thrive. By centralizing knowledge and creating a space for feedback and collaboration, 
+        we aim to make navigating these services easier and more transparent for all.
+    </p>
+  </div>
 
-<h1>Who We Are</h1>
-<p class="text-content">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue elit purus, a mattis nulla suscipit ut. 
-Nullam mattis dapibus ullamcorper. Nullam cursus ut lorem eu suscipit. In ultrices justo id malesuada venenatis. 
-Praesent ac ante nisl. Donec egestas vitae magna placerat mollis. Curabitur auctor dolor erat, vel lobortis nibh auctor at. 
-Proin condimentum purus non commodo ultrices. In ac consequat mauris, sit amet maximus metus. Vestibulum ut tortor vulputate, 
-dignissim dolor nec, sagittis tortor. Curabitur consectetur malesuada mollis. Praesent ut venenatis risus. Proin porttitor 
-pharetra justo, at iaculis nisl porta eget. Aenean et imperdiet quam, a blandit augue. Curabitur tristique mauris quis nulla 
-posuere maximus.</p>
+  <!-- Other Sections without light grey background -->
+  <div class="normal-section">
+    <h1>Who We Are</h1>
+    <p class="text-content">
+        We are a team focused on providing an easy-to-use platform where users can find, post, and rate free or low-cost resources.
+        Our web app organizes resources into categories such as food, housing, healthcare, legal services, education, and childcare.
+        By centralizing this information, we aim to make it easier for individuals to access the services they need, with a simple
+        interface for both users and contributors.
+    </p>
+  </div>
 
-<h1>How can I use COmmunity?</h1>
-<p class="text-content">COmmunity aims to be an easy-to-use interface where users can view, save, and access resources in a centralized
-location. We have partnered with various organizations in order to provide these services through a free computer application. </p>
-<p class="text-content"><b>Logged in users</b> will be able to:
-<br> - save and rate events
-<br> - submit reviews 
-<br> - suggest free / low cost events or resources for the public
-<br> - get personalized suggestions for events and outreach programs
-</p>
+  <div class="normal-section">
+    <h1>How can I use COmmunity?</h1>
+    <p class="text-content">COmmunity aims to be an easy-to-use interface where users can view, save, and access resources in a centralized
+        location. We have partnered with various organizations in order to provide these services through a free computer application. 
+    </p>
+    <p class="text-content">
+        <b>Logged in users</b> will be able to:
+        <br> ✔ save and rate events
+        <br> ✔ submit reviews 
+        <br> ✔ suggest free / low cost events or resources for the public
+        <br> ✔ get personalized suggestions for events and outreach programs
+    </p>
+  </div>
 
-<h1>Affiliates</h1>
-<p class="text-content">
-Suspendisse potenti. Quisque ac lorem porta, tincidunt orci at, suscipit turpis. Integer a hendrerit ligula. Suspendisse 
-dapibus euismod ligula vitae tristique. Curabitur suscipit, mi eget auctor ullamcorper, urna ligula faucibus leo, in ornare 
-lacus nibh ut felis. Pellentesque lobortis nisl nulla, ut pulvinar metus tincidunt tempus. Morbi id vulputate turpis. Sed 
-fermentum imperdiet orci. Proin id orci eleifend sapien rhoncus viverra nec vitae nunc. Nulla vitae turpis vel risus lacinia 
-tristique consectetur in nisl. Morbi accumsan convallis suscipit. Sed dignissim ipsum sed augue luctus, nec dignissim neque 
-euismod.
-</p>
+  <div class="normal-section">
+    <h1>Affiliates</h1>
+    <p class="text-content">
+        Suspendisse potenti. Quisque ac lorem porta, tincidunt orci at, suscipit turpis. Integer a hendrerit ligula. Suspendisse 
+        dapibus euismod ligula vitae tristique. Curabitur suscipit, mi eget auctor ullamcorper, urna ligula faucibus leo, in ornare 
+        lacus nibh ut felis. Pellentesque lobortis nisl nulla, ut pulvinar metus tincidunt tempus. Morbi id vulputate turpis. Sed 
+        fermentum imperdiet orci. Proin id orci eleifend sapien rhoncus viverra nec vitae nunc. Nulla vitae turpis vel risus lacinia 
+        tristique consectetur in nisl. Morbi accumsan convallis suscipit. Sed dignissim ipsum sed augue luctus, nec dignissim neque 
+        euismod.
+    </p>
+  </div>
+
 </body>
 </html>
