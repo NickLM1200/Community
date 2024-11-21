@@ -25,10 +25,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_203849) do
 
   create_table "answers", primary_key: "answerID", force: :cascade do |t|
     t.string "answer", limit: 150, null: false
-    t.string "admin_username_id"
+    t.string "admin_username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["admin_username_id"], name: "index_answers_on_admin_username_id"
   end
 
   create_table "categories", primary_key: "abbv", id: { type: :string, limit: 5 }, force: :cascade do |t|
@@ -162,7 +161,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_203849) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "answers", "admins", column: "admin_username_id", primary_key: "username"
   add_foreign_key "classifications", "categories", column: "categoryabbr_id", primary_key: "abbv"
   add_foreign_key "classifications", "organizations", column: "organizationID_id", primary_key: "organizationId"
   add_foreign_key "dependents", "users", column: "userID_id", primary_key: "username"
