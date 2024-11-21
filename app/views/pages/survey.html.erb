@@ -4,8 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Survey Form</title>
+  <style>
+    /* Hide the follow-up questions initially */
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
-<!-- Add stylesheet here (CSS) -->
 
 <body>
   <h1>Survey Form</h1>
@@ -16,47 +21,61 @@
       <%= hidden_field_tag :userID_id, nil %> <!-- or leave blank for anonymous -->
     <% end %>
     <%= hidden_field_tag :questionID_id, 1 %> <!-- question 1 -->
-    
+
+    <!-- First question -->
     <div id="question1">
-      <label for="safety_check">Are you safe?</label><br>
+
+    <p class="text-content">
+    <label for="safety_check">Are you safe?</label><br>
 
       <!-- Yes option -->
-      <input type="radio" id="safe_pos" name="safety_check" value="yes" onclick="showNext()">
+      
+      <input type="radio" id="safe_pos" name="safety_check" value="yes" onclick="handleSafetyCheck('yes')">
       <label for="safe_pos">Yes</label><br>
 
-      <!-- No Option with Redirection -->
-      <input type="radio" id="safe_neg" name="safety_check" value="no" onclick="redirectToPage()">
-      <label for="safe_neg">No</label><br>
-      <button type="button" onclick="showNext()">Next</button>
+      <!-- No option with Redirection -->
+      <input type="radio" id="safe_neg" name="safety_check" value="no" onclick="handleSafetyCheck('no')">
+      <label for="safe_neg">No</label><br></p>
     </div>
-    
-    <!-- Conditional Section Based on Safety Check (Shows if No is selected) -->
-    <script>
-      function redirectToPage() {
-        window.location.href = "http://localhost:3000/safety-check"; // Change this URL to your target page. 
-      }
-    </script>
-    
-  
-    <!-- For each question 
-    ** NOTE: 
-    Each answer belongs to a question via questionanswerrel.
-    Please seed or add for additional questions and answers.
-    ** Would like to alter this so this appears AFTER conditional above. -->
-    <% @questions.each do |question| %>
-      <div class="question">
-        <h2><%= question.question %></h2> <!-- Display the question text -->
 
-        <% question.answers.each do |answer| %>
-          <div>
-            <%= radio_button_tag "responses[#{question.id}]", answer.id %>
-            <%= label_tag "responses_#{question.id}_#{answer.id}", answer.answer %>
+    <!-- Follow-up questions -->
+    <div id="followUpQuestions" class="hidden">
+      <% if @questions.present? %>
+        <% @questions.each do |question| %>
+          <div class="question">
+            <h2><%= question.question %></h2> <!-- Display the question text -->
+
+            <% question.answers.each do |answer| %>
+              <div>
+                <%= radio_button_tag "responses[#{question.id}]", answer.id %>
+                <%= label_tag "responses_#{question.id}_#{answer.id}", answer.answer %>
+              </div>
+            <% end %>
           </div>
         <% end %>
-      </div>
-    <% end %>
+      <% else %>
+        <p>Please seed or add additional questions and answers.</p>
+      <% end %>
+          <%= submit_tag "Next" %>
+    </div>
 
-    <%= submit_tag "Submit Survey" %>
+
   </form>
+
+  <script>
+    function handleSafetyCheck(option) {
+      const question1 = document.getElementById('question1');
+      const followUpQuestions = document.getElementById('followUpQuestions');
+
+      if (option === 'yes') {
+        // Hide the first question and show the follow-up questions
+        question1.style.display = 'none';
+        followUpQuestions.classList.remove('hidden');
+      } else if (option === 'no') {
+        // Redirect to another page for "no" option
+        window.location.href = "http://localhost:3000/safety-check";
+      }
+    }
+  </script>
 </body>
 </html>
