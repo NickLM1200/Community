@@ -949,17 +949,47 @@ end
  
 puts "Seed data created successfully!"
 
+puts "Clearing existing data..."
+# Clear dependent relationships first
+Survey.delete_all
+QuestionAnswerRel.delete_all
+Answer.delete_all
+Question.delete_all
+
+# Reset primary key sequences for custom PK tables
+ActiveRecord::Base.connection.reset_pk_sequence!('surveys')
+ActiveRecord::Base.connection.reset_pk_sequence!('question_answer_rels')
+ActiveRecord::Base.connection.reset_pk_sequence!('answers')
+ActiveRecord::Base.connection.reset_pk_sequence!('questions')
+
 puts "Seeding Questions..."
-question1 = Question.create!(question: "What is your age range?")
+question1 = Question.find_or_create_by!(question: "What is your age range?")
+question2 = Question.find_or_create_by!(question: "What is your preferred mode of transportation?")
+question3 = Question.find_or_create_by!(question: "How often do you exercise?")
+question4 = Question.find_or_create_by!(question: "What is your highest level of education?")
+question5 = Question.find_or_create_by!(question: "What type of music do you enjoy?")
+question6 = Question.find_or_create_by!(question: "How many hours of sleep do you get on average?")
+question7 = Question.find_or_create_by!(question: "What is your favorite season?")
 
 puts "Seeding Answers..."
-answer1 = Answer.create!(answer: "Under 18")
-answer2 = Answer.create!(answer: "19-64")
-answer3 = Answer.create!(answer: "65+")
+# Add answers as necessary
+answers = {
+  "What is your age range?" => ["Under 18", "19-64", "65+"],
+  "What is your preferred mode of transportation?" => ["Car", "Bicycle", "Public Transport", "Walking"],
+  "How often do you exercise?" => ["Daily", "A few times a week", "Rarely"],
+  "What is your highest level of education?" => ["High School", "Bachelor's Degree", "Master's Degree or higher"],
+  "What type of music do you enjoy?" => ["Pop", "Classical", "Rock", "Jazz"],
+  "How many hours of sleep do you get on average?" => ["Less than 4 hours", "4-6 hours", "7-8 hours", "More than 8 hours"],
+  "What is your favorite season?" => ["Spring", "Summer", "Fall", "Winter"]
+}
 
 puts "Associating Questions and Answers..."
-QuestionAnswerRel.create!(question: question1, answer: answer1)
-QuestionAnswerRel.create!(question: question1, answer: answer2)
-QuestionAnswerRel.create!(question: question1, answer: answer3)
+answers.each do |question_text, answer_texts|
+  question = Question.find_by(question: question_text)
+  answer_texts.each do |answer_text|
+    answer = Answer.find_or_create_by!(answer: answer_text)
+    QuestionAnswerRel.find_or_create_by!(question: question, answer: answer)
+  end
+end
 
 puts "Seeding complete!"
