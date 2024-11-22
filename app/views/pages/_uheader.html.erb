@@ -16,9 +16,6 @@
         </li>
         <% if logged_in? %>
           <li class="nav-item">
-            <%= link_to 'Recommendations', "#", class: 'nav-link' %>
-          </li>
-          <li class="nav-item">
             <%= link_to 'About Us', pages_about_us_path, class: 'nav-link' %>
           </li>
         <% else %>
@@ -45,7 +42,7 @@
             <ul class="dropdown-menu custom-dropdown-bg" aria-labelledby="accountDropdown">
               <li><%= link_to 'Profile', user_path(current_user.username), class: 'dropdown-item' %></li>
               <li><%= link_to 'Favorites', favorites_path, class: 'dropdown-item' %></li>
-              <li><%= link_to 'Surveys', surveys_path, class: 'dropdown-item' %></li>
+              <li><%= link_to 'Surveys', survey_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Settings', edit_user_path(current_user.username), class: 'dropdown-item' %></li>
               <li><%= link_to 'Logout', logout_path, method: :delete, class: 'dropdown-item' %></li>
             </ul>

@@ -1,5 +1,6 @@
 # app/controllers/survey_responses_controller.rb
 class SurveyResponsesController < ApplicationController
+  before_action :require_login
     def create
       survey = Survey.find(params[:survey_id])
       params[:responses].each do |question_id, answer_id|
