@@ -137,15 +137,19 @@
                     class: 'show-reviews-link' %>
                 </div>
 
-                <div class="contact-header">
-                    <!-- Favorite star button with AJAX form submission -->
-                    <div class="favorite">
-                        <%= form_with model: Favorite.new, url: favorites_path, method: :post, local: false do |f| %>
-                            <%= f.hidden_field :organizationID_id, value: organization.organizationId %>
-                            <%= f.submit "★", class: "favorite-star #{'favorited' if current_user.favorites.exists?(organizationID_id: organization.id)}", title: "Add to Favorites", data: { confirm: 'Are you sure you want to add this organization to your favorites?' } %>
-                        <% end %>
+                <%if logged_in? %>
+                    <div class="contact-header">
+                        <!-- Favorite star button with AJAX form submission -->
+                        <div class="favorite">
+                            <%= form_with model: Favorite.new, url: favorites_path, method: :post, local: false do |f| %>
+                                <%= f.hidden_field :organizationID_id, value: organization.organizationId %>
+                                <%= f.submit "★", class: "favorite-star #{'favorited' if current_user.favorites.exists?(organizationID_id: organization.id)}", title: "Add to Favorites", data: { confirm: 'Are you sure you want to add this organization to your favorites?' } %>
+                            <% end %>
+                        </div>
                     </div>
-                </div>
+                <% else %>
+                <p></p>
+                <% end %>
 
                 <div class="info-buttons">
                     <!-- Address button showing full address -->
