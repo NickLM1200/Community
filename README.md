@@ -174,10 +174,10 @@ We at COmmunity are interested in expanding to add more features for end users. 
 ## Contributors
 
 - NickLM1200 - Nic
-- GOKU900 - Lizeth Amateco Nava
+- GOKU900 - L.A.N
 - Marsvx - Mauren Vasquez
 - akrajeski - Anna Krajeski
 - NatashaLeeXY - Natasha Lee
 - Ariamestra - Maria Estrada
 
-Interested in joing our project? Join our organization [https://github.com/Colorado-Community-Resources] to make changes.
+Interested in joining our project? Join our organization [https://github.com/Colorado-Community-Resources] to make changes.
