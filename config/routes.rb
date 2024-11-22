@@ -71,6 +71,8 @@ Rails.application.routes.draw do
   post "adminaccess", to: "administrator/asession#create"
   delete "adminlogout", to: "administrator/asession#destroy"
 
+  get "pages/survey", to: "pages#survey", as: 'survey'
+
   # User session management
   get "login", to: "sessions#new", as: :login   # Use the index action for displaying login form
   post "login", to: "sessions#create"  # Use the new login action for logging in

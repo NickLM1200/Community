@@ -1,8 +1,8 @@
-<!-- Survey Created for Community Resource -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= csrf_meta_tags %> <!-- Ensure CSRF token is included -->
   <title>Survey Form</title>
   <style>
     /* Hide the follow-up questions initially */
@@ -15,27 +15,30 @@
 <body>
   <h1>Survey Form</h1>
   <form action="<%= surveys_path %>" method="POST">
+    <!-- CSRF token for form authenticity -->
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
     <% if current_user %>
       <%= hidden_field_tag :userID_id, current_user.id %> <!-- logged in user -->
     <% else %>
       <%= hidden_field_tag :userID_id, nil %> <!-- or leave blank for anonymous -->
     <% end %>
+    
     <%= hidden_field_tag :questionID_id, 1 %> <!-- question 1 -->
 
     <!-- First question -->
     <div id="question1">
+      <p class="text-content">
+        <label for="safety_check">Are you safe?</label><br>
 
-    <p class="text-content">
-    <label for="safety_check">Are you safe?</label><br>
+        <!-- Yes option -->
+        <input type="radio" id="safe_pos" name="safety_check" value="yes" onclick="handleSafetyCheck('yes')">
+        <label for="safe_pos">Yes</label><br>
 
-      <!-- Yes option -->
-      
-      <input type="radio" id="safe_pos" name="safety_check" value="yes" onclick="handleSafetyCheck('yes')">
-      <label for="safe_pos">Yes</label><br>
-
-      <!-- No option with Redirection -->
-      <input type="radio" id="safe_neg" name="safety_check" value="no" onclick="handleSafetyCheck('no')">
-      <label for="safe_neg">No</label><br></p>
+        <!-- No option with Redirection -->
+        <input type="radio" id="safe_neg" name="safety_check" value="no" onclick="handleSafetyCheck('no')">
+        <label for="safe_neg">No</label><br>
+      </p>
     </div>
 
     <!-- Follow-up questions -->
@@ -56,10 +59,8 @@
       <% else %>
         <p>Please seed or add additional questions and answers.</p>
       <% end %>
-          <%= submit_tag "Next" %>
+      <%= submit_tag "Next" %>
     </div>
-
-
   </form>
 
   <script>
